@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
-    <RootNamespace>silhouetris</RootNamespace>
+    <RootNamespace>emptyExample</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -50,7 +50,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glee\include;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxOpenNI\include\openni\Win32;..\..\..\addons\ofxOpenNI\include\nite;..\..\..\addons\ofxOpenNI\include\openni;..\..\..\addons\ofxOpenNI\src;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glee\include;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;POCO_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -61,9 +61,9 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>openframeworksLibDebug.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudioD.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;GLee.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmtd.lib;PocoNetmtd.lib;PocoUtilmtd.lib;PocoXMLmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>openframeworksLibDebug.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudioD.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;GLee.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmtd.lib;PocoNetmtd.lib;PocoUtilmtd.lib;PocoXMLmtd.lib;openNI.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>..\..\..\libs\glut\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;..\..\..\libs\glee\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\Poco\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>bin\data\openni\lib;..\..\..\libs\glut\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;..\..\..\libs\glee\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\Poco\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>atlthunk.lib; LIBC.lib; LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(TargetDir)$(TargetName)_debugInfo.pdb</ProgramDatabaseFile>
@@ -83,7 +83,7 @@ if not exist "$(ProjectDir)bin\data" mkdir  "$(ProjectDir)bin\data"
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glee\include;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxOpenNI\include\openni\Win32;..\..\..\addons\ofxOpenNI\include\nite;..\..\..\addons\ofxOpenNI\include\openni;..\..\..\addons\ofxOpenNI\src;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\utils;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glee\include;..\..\..\libs\glu\include;..\..\..\libs\poco\include;..\..\..\addons;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;POCO_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -93,8 +93,8 @@ if not exist "$(ProjectDir)bin\data" mkdir  "$(ProjectDir)bin\data"
       </DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>openframeworksLib.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudio.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;GLee.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmt.lib;PocoNetmt.lib;PocoUtilmt.lib;PocoXMLmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\libs\glut\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;..\..\..\libs\glee\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\Poco\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>openframeworksLib.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudio.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;GLee.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmt.lib;PocoNetmt.lib;PocoUtilmt.lib;PocoXMLmt.lib;openNI.lib;Ws2_32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>bin\data\openni\lib;..\..\..\libs\glut\lib\vs2010;..\..\..\libs\rtAudio\lib\vs2010;..\..\..\libs\FreeImage\lib\vs2010;..\..\..\libs\freetype\lib\vs2010;..\..\..\libs\quicktime\lib\vs2010;..\..\..\libs\fmodex\lib\vs2010;..\..\..\libs\videoInput\lib\vs2010;..\..\..\libs\glee\lib\vs2010;..\..\..\libs\glu\lib\vs2010;..\..\..\libs\Poco\lib\vs2010;..\..\..\libs\openFrameworksCompiled\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>atlthunk.lib; LIBC.lib; LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -116,17 +116,179 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\testApp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\testApp.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs2010\openframeworksLib.vcxproj">
       <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxDepthGenerator.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxGestureGenerator.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxHandGenerator.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxImageGenerator.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxIRGenerator.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxOpenNIContext.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxOpenNIRecorder.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxTrackedHand.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxTrackedUser.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxOpenNI\src\ofxUserGenerator.cpp" />
+    <ClCompile Include="src\gameCore.cpp" />
+    <ClCompile Include="src\gameMedia.cpp" />
+    <ClCompile Include="src\graficEngine.cpp" />
+    <ClCompile Include="src\gameLogic.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\userImput.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnCommon.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnV3DVector.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVActivationMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVBroadcaster.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVCCMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVCircle.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVCircleDetector.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVClickableVirtualPlane.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVComplexMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDepthControl.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDepthGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDepthMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDeviceControl.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDeviceFilter.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDeviceGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDeviceMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVDirection.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVFilter.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVFlowRouter.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVGesture.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVHandle.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVHandPointContext.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVImageGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVImageMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMathCommon.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMessageGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMessageListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMessageMux.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMultiItemHysteresis1D.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMultiItemHysteresis2D.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMultipleHands.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMultiProcessFlowClient.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVMultiProcessFlowServer.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNite.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNiteControls.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNiteDefs.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNiteEvents.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNiteFramework.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNiteLog.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNiteStatus.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVNiteVersion.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVPointArea.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVPointControl.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVPointDenoiser.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVPointFilter.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVPointMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVPointTracker.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVPushDetector.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSelectableSlider1D.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSelectableSlider2D.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSessionGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSessionListener.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSessionManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSessionMessage.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSlider1D.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSlider2D.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSlider3D.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSteadyDetector.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVSwipeDetector.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVVirtualCoordinates.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\nite\XnVWaveDetector.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\IXnNodeAllocator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\Win32\XnOSWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\Win32\XnPlatformWin32.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnBaseNode.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnCallback.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnCodecIDs.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnContext.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnCppWrapper.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnDataTypes.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnEnumerationErrors.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnEvent.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnFPSCalculator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnGeneralBuffer.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnHash.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnInternalDefs.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnLicensing.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnList.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnLog.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnMacros.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnModuleCppInterface.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnModuleCppRegistratration.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnModuleInterface.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnNode.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnNodeAllocator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnOpenNI.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnOS.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnOSCpp.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnPlatform.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnPrdNode.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnPrdNodeInfo.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnPrdNodeInfoList.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnProfiling.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnPropNames.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnQueries.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnQueue.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnScheduler.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnStack.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnStatus.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnStatusCodes.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnStatusRegister.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnStringsHash.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnThreadSafeQueue.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnTypes.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnUSB.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\include\openni\XnVersion.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxDepthGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxGestureGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxHandGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxImageGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxIRGenerator.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxOpenNI.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxOpenNIContext.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxOpenNIMacros.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxOpenNIRecorder.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxTrackedHand.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxTrackedUser.h" />
+    <ClInclude Include="..\..\..\addons\ofxOpenNI\src\ofxUserGenerator.h" />
+    <ClInclude Include="src\gameCore.h" />
+    <ClInclude Include="src\gameMedia.h" />
+    <ClInclude Include="src\graficEngine.h" />
+    <ClInclude Include="src\gameLogic.h" />
+    <ClInclude Include="src\userImput.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\b1.jpg" />
+    <None Include="bin\data\b2.jpg" />
+    <None Include="bin\data\b3.jpg" />
+    <None Include="bin\data\b4.jpg" />
+    <None Include="bin\data\b5.jpg" />
+    <None Include="bin\data\b6.jpg" />
+    <None Include="bin\data\copyright.jpg" />
+    <None Include="bin\data\gameLabel.jpg" />
+    <None Include="bin\data\gameover.wav" />
+    <None Include="bin\data\hit.wav" />
+    <None Include="bin\data\leftWall.jpg" />
+    <None Include="bin\data\line.wav" />
+    <None Include="bin\data\logo.jpg" />
+    <None Include="bin\data\musicGame.mp3" />
+    <None Include="bin\data\musicIdle.mp3" />
+    <None Include="bin\data\musicReco.mp3" />
+    <None Include="bin\data\outline.jpg" />
+    <None Include="bin\data\overLabel.jpg" />
+    <None Include="bin\data\pixelart.ttf" />
+    <None Include="bin\data\recoLabel.jpg" />
+    <None Include="bin\data\rightWall.jpg" />
+    <None Include="bin\data\scoreBG.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

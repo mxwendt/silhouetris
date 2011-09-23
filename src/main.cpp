@@ -1,11 +1,15 @@
 #include "ofMain.h"
-#include "testApp.h"
+#include "gameCore.h"
 #include "ofAppGlutWindow.h"
 
 
-int main() {
-	ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1280, 720, OF_WINDOW);			// <-------- setup the GL context
+//========================================================================
 
-	ofRunApp(new testApp());
+int main() {
+
+    ofAppGlutWindow window;
+	ofSetupOpenGL(&window, 1280,720, OF_WINDOW); // OF_WINDOW or OF_FULLSCREEN
+
+	ofRunApp(new gameCore());
+
 }
