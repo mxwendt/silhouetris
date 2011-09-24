@@ -1,6 +1,13 @@
 #include "gameCore.h"
+#include "userImput.h"
+#include "gameLogic.h"
+#include "gameMedia.h"
 
 void gameCore::setup() {
+	gameLogic.init();
+	userImput.init();
+	gameMedia.init();
+
 	// set values
 	isIdleMode = true;
 	isRecoMode = false;
