@@ -116,19 +116,53 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\gameCore.cpp" />
+    <ClCompile Include="src\gameLogic.cpp" />
+    <ClCompile Include="src\gameMedia.cpp" />
+    <ClCompile Include="src\graficEngine.cpp" />
     <ClCompile Include="src\Kinect.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\testApp.cpp" />
+    <ClCompile Include="src\userImput.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\gameCore.h" />
+    <ClInclude Include="src\gameLogic.h" />
+    <ClInclude Include="src\gameMedia.h" />
+    <ClInclude Include="src\graficEngine.h" />
     <ClInclude Include="src\Kinect.h" />
     <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="src\userImput.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs2010\openframeworksLib.vcxproj">
       <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\b1.jpg" />
+    <None Include="bin\data\b2.jpg" />
+    <None Include="bin\data\b3.jpg" />
+    <None Include="bin\data\b4.jpg" />
+    <None Include="bin\data\b5.jpg" />
+    <None Include="bin\data\b6.jpg" />
+    <None Include="bin\data\copyright.jpg" />
+    <None Include="bin\data\gameLabel.jpg" />
+    <None Include="bin\data\gameover.wav" />
+    <None Include="bin\data\hit.wav" />
+    <None Include="bin\data\leftWall.jpg" />
+    <None Include="bin\data\line.wav" />
+    <None Include="bin\data\logo.jpg" />
+    <None Include="bin\data\musicGame.mp3" />
+    <None Include="bin\data\musicIdle.mp3" />
+    <None Include="bin\data\musicReco.mp3" />
+    <None Include="bin\data\outline.jpg" />
+    <None Include="bin\data\overLabel.jpg" />
+    <None Include="bin\data\pixelart.ttf" />
+    <None Include="bin\data\recoLabel.jpg" />
+    <None Include="bin\data\rightWall.jpg" />
+    <None Include="bin\data\scoreBG.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
