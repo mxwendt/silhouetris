@@ -25,7 +25,13 @@
     <ClCompile Include="src\gameSound.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
-    <ClCompile Include="gameImages.cpp">
+    <ClCompile Include="src\gameImages.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameStateManager.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IdleState.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,7 +57,16 @@
     <ClInclude Include="src\gameSound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gameImages.h">
+    <ClInclude Include="src\gameImages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IdleState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameStateManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
