@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\gameCore.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\userImput.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameLogic.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graficEngine.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kinect.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testApp.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameSound.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="gameImages.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\gameCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graficEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kinect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\testApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\userImput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameSound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameImages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\b1.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\copyright.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\b2.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\b3.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\b4.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\b5.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\b6.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\gameLabel.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\gameover.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\hit.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\leftWall.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\line.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\musicGame.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\musicIdle.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\musicReco.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\pixelart.ttf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\overLabel.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\outline.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\recoLabel.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\rightWall.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\scoreBG.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bin\data\logo.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Code">
+      <UniqueIdentifier>{ff85db5f-cabb-4a05-bdba-984f39b2f8bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{d25b5e97-aa6b-4cb0-85ab-50b9a745ff38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{33b4281d-d23f-4fb3-a913-982d6f65a09d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
