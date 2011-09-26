@@ -1,7 +1,7 @@
 #ifndef _USER_IMPUT
 #define _USER_IMPUT
 
-class userImput {
+class UserImput {
 
 public:
 	void init();

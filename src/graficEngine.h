@@ -1,7 +1,7 @@
 #ifndef _GRAFIC_ENGINE
 #define _GRAFIC_ENGINE
 
-class graficEngine {
+class GraficEngine {
 
 public:
 	void init();

@@ -1,5 +1,5 @@
 #include "userImput.h"
 
-void userImput::init() {
+void UserImput::init() {
 
 }

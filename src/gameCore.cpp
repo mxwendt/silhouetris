@@ -1,13 +1,15 @@
 #include "gameCore.h"
-#include "userImput.h"
-#include "gameLogic.h"
-#include "gameMedia.h"
 
-void gameCore::setup() {
+void GameCore::setup() {
+
+	gameSound.loadSoundFiles();
+
 	gameLogic.init();
 	userImput.init();
-	gameMedia.init();
+	graficEngine.init();
 
+	loadExternalData();
+	
 	// set values
 	isIdleMode = true;
 	isRecoMode = false;
@@ -23,9 +25,6 @@ void gameCore::setup() {
 	farThreshold = 3000;
 	gameSpeed = 1;
 	blockSpeed = 1000;
-	idleSoundVol = 1.0f;
-	recoSoundVol = 1.0f;
-	gameSoundVol = 1.0f;
 
 	// clear matrices
 	clearPieceBlocks(activeBlocks);
@@ -37,14 +36,11 @@ void gameCore::setup() {
 	nearThreshold = 1000;
 	farThreshold = 3000;
 
-	// load external data
-	loadExternalData();
-
 	// set background color
 	ofBackground(39, 40, 32);
 }
 
-void gameCore::update() {
+void GameCore::update() {
 	if(isIdleMode) {
 		updateDepthStream();
 		checkActiveBlocks();
@@ -72,7 +68,7 @@ void gameCore::update() {
 	}
 }
 
-void gameCore::draw() {
+void GameCore::draw() {
 	if(isIdleMode) {
 		ofSetColor(255, 255, 255);
 		imgLogo.draw(140, 250);
@@ -132,7 +128,7 @@ void gameCore::draw() {
 	}
 }
 
-void gameCore::keyPressed(int key) {
+void GameCore::keyPressed(int key) {
 	switch (key) {
 		case '1': 
 			switchMode('idle'); 
@@ -149,53 +145,26 @@ void gameCore::keyPressed(int key) {
 		/*case '5': 
 			deleteLine(18); 
 			break;*/
-		// increase volume of idle sound
 		case '6':
-			idleSoundVol += 0.1f;
-			if(idleSoundVol > 1.0f) {
-				idleSoundVol = 1.0f;
-			}
-			soundIdle.setVolume(idleSoundVol);
+			gameSound.increaseIdleMusicVol(0.1f);
 			break;
-		// decrease volume of idle sound
-		case '5':		
-			idleSoundVol -= 0.1f;
-			if(idleSoundVol < 0.0f) {
-				idleSoundVol = 0.0f;
-			}
-			soundIdle.setVolume(idleSoundVol);
+		case '5':
+			gameSound.decreaseIdleMusicVol(0.1f);
 			break;
-		// increase volume of reco sound
 		case '8':
-			recoSoundVol += 0.1f;
-			if(recoSoundVol > 1.0f) {
-				recoSoundVol = 1.0f;
-			}
-			soundReco.setVolume(recoSoundVol);
+			gameSound.increaseRecoMusicVol(0.1f);
 			break;
-		// decrease volume of reco sound
-		case '7':		
-			recoSoundVol -= 0.1f;
-			if (recoSoundVol < 0.0f) {
-				recoSoundVol = 0.0f;
-			}
-			soundReco.setVolume(recoSoundVol);
+		case '7':
+			gameSound.decreaseRecoMusicVol(0.1f);
 			break;
-		// increase volume of game sound
 		case '0':
-			gameSoundVol += 0.1f;
-			if(gameSoundVol > 1.0f) {
-				gameSoundVol = 1.0f;
-			}
-			soundGame.setVolume(gameSoundVol);
+			gameSound.increaseRecoMusicVol(0.1f);
 			break;
-		// decrease volume of reco sound
-		case '9':		
-			gameSoundVol -= 0.1f;
-			if(gameSoundVol < 0.0f) {
-				gameSoundVol = 0.0f;
-			}
-			soundGame.setVolume(gameSoundVol);
+		case '9':
+			gameSound.decreaseGameMusicVol(0.1f);
+			break;
+		case 'b':s
+			gameSound.stopPlayingMusic();
 			break;
 		// increase threshold to the front
 		case 'n':
@@ -230,11 +199,11 @@ void gameCore::keyPressed(int key) {
 	}
 }
 
-void gameCore::windowResized(int w, int h) {
+void GameCore::windowResized(int w, int h) {
 	//
 }
 
-void gameCore::loadExternalData() {
+void GameCore::loadExternalData() {
 	// load external image files
 	imgLogo.loadImage("logo.jpg");
 	imgCopyright.loadImage("copyright.jpg");
@@ -252,77 +221,45 @@ void gameCore::loadExternalData() {
 	imgOverLabel.loadImage("overLabel.jpg");
 	imgOutline.loadImage("outline.jpg");
 
-	// load and set up external sound files
-	idleSoundVol = 1.0f;
-	recoSoundVol = 1.0f;
-	gameSoundVol = 1.0f;
-	soundLine.setMultiPlay(true);
-	soundLine.setVolume(0.8f);
-	soundLine.loadSound("line.wav");
-	soundHit.setMultiPlay(true);
-	soundHit.setVolume(0.6f);
-	soundHit.loadSound("hit.wav");
-	soundOver.setVolume(0.8f);
-	soundOver.loadSound("gameover.wav");
-	soundIdle.setVolume(idleSoundVol);
-	soundIdle.setLoop(true);
-	soundIdle.loadSound("musicIdle.mp3", true); // gets streamed
-	soundReco.setVolume(recoSoundVol);
-	soundReco.setLoop(true);
-	soundReco.loadSound("musicReco.mp3", true); // gets streamed
-	soundGame.setVolume(gameSoundVol);
-	soundGame.setLoop(true);
-	soundGame.loadSound("musicGame.mp3", true);	// gets streamed
-	
 	// load external font files
 	font.loadFont("pixelart.ttf", 44);
 }
 
-void gameCore::switchMode(int mode) {
+void GameCore::switchMode(int mode) {
 	isIdleMode = false;
 	isRecoMode = false;
 	isGameMode = false;
 	isOverMode = false;
 
-	if(soundGame.isStreaming) {
-		soundGame.stop();
-	}
-	if(soundIdle.isStreaming) {
-		soundIdle.stop();
-	}
-	if(soundReco.isStreaming) {
-		soundReco.stop();
-	}
+	gameSound.stopPlayingMusic();
 
 	switch(mode) {
 		case 'idle':
 			isIdleMode = true;
-			soundIdle.play();
-			soundIdle.setPosition(0.1f); // this is specific for the current idle sound
+			gameSound.playIdleMusic();
 			break;
 		case 'reco':
 			isRecoMode = true;
-			soundReco.play();
+			gameSound.playRecoMusic();
 			break;
 		case 'game':
 			isGameMode = true;
 			resetGame();
 			highscore = 0;
 			prevTime = ofGetElapsedTimeMillis();
-			soundGame.play();
+			gameSound.playGameMusic();
 			break;
 		case 'over':
 			isOverMode = true;
-			soundOver.play();
-			soundIdle.play();
-			soundIdle.setPosition(0.1f); // this is specific for the current idle sound
+			gameSound.playSoundGameOver();
+			gameSound.playIdleMusic();
 			break;
 		default: 
 			break;
 	}
 }
 
-void gameCore::clearPieceBlocks(bool blocks[PIECEWIDTH][PIECEHEIGHT]) {	
+void GameCore::clearPieceBlocks(bool blocks[PIECEWIDTH][PIECEHEIGHT]) {	
 	for(int i = 0; i < PIECEWIDTH; i++) {
 		for(int j = 0; j < PIECEHEIGHT; j++) {
 			blocks[i][j] = false;
@@ -330,7 +267,7 @@ void gameCore::clearPieceBlocks(bool blocks[PIECEWIDTH][PIECEHEIGHT]) {
 	}
 }
 
-void gameCore::clearGameBlocks(int blocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]) {
+void GameCore::clearGameBlocks(int blocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]) {
 	for(int i = 0; i < GAMESCREENWIDTH; i++) {
 		for(int j = 0; j < GAMESCREENHEIGHT; j++) {
 			blocks[i][j] = 0;
@@ -338,7 +275,7 @@ void gameCore::clearGameBlocks(int blocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]) {
 	}
 }
 
-void gameCore::updateDepthStream() {
+void GameCore::updateDepthStream() {
 
 	unsigned char tracking[640 * 480];
 	unsigned char block[120 * 120];
@@ -371,7 +308,7 @@ void gameCore::updateDepthStream() {
 	setMoveBlock(depthStream.getPixels(380, 0, 20, 480, block), RIGHT);
 }
 
-void gameCore::setActiveBlock(unsigned char* pixels, int col, int line) {
+void GameCore::setActiveBlock(unsigned char* pixels, int col, int line) {
 	int counter = 0;
 	for(int i = 0; i < 120 * 120; i++) {
 		if(pixels[i] != 0) {
@@ -387,7 +324,7 @@ void gameCore::setActiveBlock(unsigned char* pixels, int col, int line) {
 	}
 }
 
-void gameCore::checkActiveBlocks() {
+void GameCore::checkActiveBlocks() {
 	// check if somebody is in the tracking area
 	if(isIdleMode && (activeBlocks[0][0] || activeBlocks[0][1] ||
 			  activeBlocks[0][2] || activeBlocks[0][3] ||
@@ -431,7 +368,7 @@ void gameCore::checkActiveBlocks() {
 	}
 }
 
-void gameCore::setPieceBlocks() {
+void GameCore::setPieceBlocks() {
 	for(int i1 = pieceX, i2 = 0; i1 < pieceX + PIECEWIDTH; i1++, i2++) {
 		for(int j1 = pieceY, j2 = 0; j1 < pieceY + PIECEHEIGHT; j1++, j2++) {
 			if(gameBlocks[i1][j1] == 0) {
@@ -441,7 +378,7 @@ void gameCore::setPieceBlocks() {
 	}
 }
 
-void gameCore::updateGameScreen() {
+void GameCore::updateGameScreen() {
 	// check if somebody is in the tracking area
 	if(!activeBlocks[0][0] && !activeBlocks[0][1] &&
 	   !activeBlocks[0][2] && !activeBlocks[0][3] &&
@@ -477,7 +414,7 @@ void gameCore::updateGameScreen() {
 	}
 }
 
-void gameCore::resetGame() {
+void GameCore::resetGame() {
 	clearPieceBlocks(pieceBlocks);
 	clearGameBlocks(gameBlocks);
 	pieceX = 0;
@@ -487,7 +424,7 @@ void gameCore::resetGame() {
 	//highscore = 0;
 }
 
-void gameCore::drawBG() {
+void GameCore::drawBG() {
 	//  draw walls and label
 	ofSetColor(255, 255, 255);
 	imgLeftWall.draw(159, 0);
@@ -499,7 +436,7 @@ void gameCore::drawBG() {
 	ofRect(190, 0, 400, 720);
 }
 
-void gameCore::drawSilhouette(int x, int y, int size) {
+void GameCore::drawSilhouette(int x, int y, int size) {
 	ofSetColor(255, 255, 255);
 	imgOutline.draw(x - 57, y - 10);
 	depthStream.draw(x - 50, y, size * 3 + 100, size * 4);
@@ -525,7 +462,7 @@ void gameCore::drawSilhouette(int x, int y, int size) {
 	ofDisableAlphaBlending(); // turn it back off, if you don't need it
 }
 
-void gameCore::drawBoard() {
+void GameCore::drawBoard() {
 	ofSetColor(255, 255, 255);
 	for(int i = 0; i < GAMESCREENWIDTH; i++) {
 		for(int j = 0; j < GAMESCREENHEIGHT; j++) {
@@ -558,7 +495,7 @@ void gameCore::drawBoard() {
 	clearScreen = false;
 }
 
-void gameCore::drawPiece() {
+void GameCore::drawPiece() {
 	for(int i = 0; i < PIECEWIDTH; i++) {
 		for(int j = 0; j < PIECEHEIGHT; j++) {
 			if(pieceBlocks[i][j]) {
@@ -577,21 +514,21 @@ void gameCore::drawPiece() {
 	}
 }
 
-void gameCore::drawGameOverZone() {
+void GameCore::drawGameOverZone() {
 	ofEnableAlphaBlending(); // turn on alpha blending
 	ofSetColor(186, 205, 54, 80);
 	ofRect(190, 0, 400, 160);
 	ofDisableAlphaBlending(); // turn it back off, if you don't need it
 }
 
-void gameCore::drawScore() {
+void GameCore::drawScore() {
 	ofSetColor(39, 40, 32);
 	stringstream ss;
 	ss << highscore;
 	font.drawString(ss.str(), 690, 655);
 }
 
-int gameCore::calcScore() {
+int GameCore::calcScore() {
 	complexCalcR0 = 0; //top row
 	complexCalcR1 = 0;
 	complexCalcR2 = 0;
@@ -655,7 +592,7 @@ int gameCore::calcScore() {
 	}
 }
 
-int gameCore::addUpScore(int line) {
+int GameCore::addUpScore(int line) {
 	int tempScore = 0;
 	for(int i = 0; i < GAMESCREENWIDTH; i++) {
 		tempScore += (gameBlocks[i][line] * 5);
@@ -663,7 +600,7 @@ int gameCore::addUpScore(int line) {
 	return tempScore;
 }
 
-bool gameCore::isPossibleMove(int pX, int pY) {
+bool GameCore::isPossibleMove(int pX, int pY) {
 	for(int i1 = pX, i2 = 0; i1 < pX + PIECEWIDTH; i1++, i2++) {
 		for(int j1 = pY, j2 = 0; j1 < pY + PIECEHEIGHT; j1++, j2++) {
 			// check if the piece is outside the limits of the board
@@ -685,7 +622,7 @@ bool gameCore::isPossibleMove(int pX, int pY) {
 	return true;
 }
 
-bool gameCore::isGameOver() {
+bool GameCore::isGameOver() {
 	// if the first line has blocks then the game is over
 	for(int i = 0; i < GAMESCREENWIDTH; i++) {
 		if(gameBlocks[i][3] > 0) {
@@ -695,7 +632,7 @@ bool gameCore::isGameOver() {
 	return false;
 }
 
-void gameCore::setMoveBlock(unsigned char* pixels, int direction) {
+void GameCore::setMoveBlock(unsigned char* pixels, int direction) {
 	int counter = 0;
 	for(int i = 0; i < 20 * 480; i++) {	
 		if (pixels[i] != 0) {
@@ -721,17 +658,17 @@ void gameCore::setMoveBlock(unsigned char* pixels, int direction) {
 	}
 }
 
-void gameCore::deleteLine (int pY) {
+void GameCore::deleteLine (int pY) {
 	// moves all the upper lines, except the first 4 startrows, one row down
 	for(int j = pY; j > 3; j--) {
 		for(int i = 0; i < GAMESCREENWIDTH; i++) {
 			gameBlocks[i][j] = gameBlocks[i][j-1];
 		}
 	}
-	soundLine.play();
+	gameSound.playSoundClearLine();
 }
 
-void gameCore::deletePossibleLines () {
+void GameCore::deletePossibleLines () {
 	for(int j = 0; j < GAMESCREENHEIGHT; j++) {
 		int i = 0;
 		while(i < GAMESCREENWIDTH) {
@@ -757,7 +694,7 @@ void gameCore::deletePossibleLines () {
 	}
 }
 
-void gameCore::storePiece(int scoreOfStone) {
+void GameCore::storePiece(int scoreOfStone) {
 	for(int i1 = pieceX, i2 = 0; i1 < pieceX + PIECEWIDTH; i1++, i2++) {
 		for(int j1 = pieceY, j2 = 0; j1 < pieceY + PIECEHEIGHT; j1++, j2++) {
 			if(pieceBlocks[i2][j2]) {
@@ -765,5 +702,5 @@ void gameCore::storePiece(int scoreOfStone) {
 			}
 		}
 	}
-	soundHit.play();
+	gameSound.playSoundHitBottom();
 }

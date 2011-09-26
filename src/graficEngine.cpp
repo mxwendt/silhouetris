@@ -1,5 +1,5 @@
 #include "graficEngine.h"
 
-void graficEngine::init() {
+void GraficEngine::init() {
 
 }

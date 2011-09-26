@@ -1,7 +1,7 @@
 #ifndef _GAME_LOGIC
 #define _GAME_LOGIC
 
-class gameLogic {
+class GameLogic {
 
 public:
 	void init();

@@ -1,5 +1,5 @@
 #include "gameLogic.h"
 
-void gameLogic::init() {
+void GameLogic::init() {
 
 }

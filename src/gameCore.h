@@ -3,6 +3,11 @@
 
 #include "ofMain.h"
 #include "Kinect.h"
+#include "gameSound.h"
+#include "userImput.h"
+#include "gameLogic.h"
+#include "graficEngine.h"
+//#include "gameImages.h"
 
 #define GAMESCREENX 190
 #define GAMESCREENY 0
@@ -20,7 +25,7 @@
 #define LEFT 0 
 #define RIGHT 1
 
-class gameCore : public ofBaseApp{
+class GameCore : public ofBaseApp{
 public:
 	void setup();
 	void update();
@@ -28,6 +33,12 @@ public:
 
 	void keyPressed(int key);
 	void windowResized(int w, int h);
+
+	GameSound gameSound;
+	GameLogic gameLogic;
+	UserImput userImput;
+	GraficEngine graficEngine;
+//	GameImages gameImages;
 
 private:
 	void loadExternalData();
@@ -86,8 +97,8 @@ private:
 	float complexCalcR1;
 	float complexCalcR2;
 	float complexCalcR3;
-
-	// external data
+	
+	//images
 	ofImage	imgLogo;
 	ofImage	imgCopyright;
 	ofImage	imgLeftWall;
@@ -103,19 +114,10 @@ private:
 	ofImage imgGameLabel;
 	ofImage imgOverLabel;
 	ofImage imgOutline;
-	ofTrueTypeFont font; // should still be changed to "gunship bitmap"
-	ofSoundPlayer soundLine;
-	ofSoundPlayer soundHit;
-	ofSoundPlayer soundOver;
-	ofSoundPlayer soundIdle;
-	ofSoundPlayer soundReco;
-	ofSoundPlayer soundGame;
 
-	//
-	float idleSoundVol;
-	float recoSoundVol;
-	float gameSoundVol;
-	
+	//font
+	ofTrueTypeFont font; // should still be changed to "gunship bitmap"
+
 	//
 	ofImage depthMask;
 	ofImage	depthStream;

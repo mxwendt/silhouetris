@@ -10,9 +10,6 @@
     <ClCompile Include="src\gameLogic.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
-    <ClCompile Include="src\gameMedia.cpp">
-      <Filter>Source Code</Filter>
-    </ClCompile>
     <ClCompile Include="src\graficEngine.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
@@ -25,15 +22,18 @@
     <ClCompile Include="src\testApp.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
+    <ClCompile Include="src\gameSound.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="gameImages.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gameCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\gameLogic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gameMedia.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graficEngine.h">
@@ -46,6 +46,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\userImput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameSound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameImages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
