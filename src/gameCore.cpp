@@ -23,8 +23,9 @@ void GameCore::setup() {
 	pieceX = 3;
 	nearThreshold = 1500;
 	farThreshold = 3000;
-	gameSpeed = 1;
+	timeToLevelUp = 60;
 	blockSpeed = 1000;
+	speedIncreaseLevel = 200;
 
 	// clear matrices
 	clearPieceBlocks(activeBlocks);
@@ -56,9 +57,9 @@ void GameCore::update() {
 	else if(isGameMode) {
 		updateDepthStream();
 
-		if(ofGetElapsedTimeMillis() - prevTime > blockSpeed) {
+		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > blockSpeed) {
 			updateGameScreen();
-			prevTime = ofGetElapsedTimeMillis();
+			elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
 		}
 	}
 	else {
@@ -147,21 +148,27 @@ void GameCore::keyPressed(int key) {
 			break;*/
 		case '6':
 			gameSound.increaseIdleMusicVol(0.1f);
+			cout << "IdleMusicVol" <<  gameSound.getIdleMusicVol() << endl;
 			break;
 		case '5':
 			gameSound.decreaseIdleMusicVol(0.1f);
+			cout << "IdleMusicVol" <<  gameSound.getIdleMusicVol() << endl;
 			break;
 		case '8':
 			gameSound.increaseRecoMusicVol(0.1f);
+			cout << "RecoMusicVol" <<  gameSound.getRecoMusicVol() << endl;
 			break;
 		case '7':
 			gameSound.decreaseRecoMusicVol(0.1f);
+			cout << "RecoMusicVol" <<  gameSound.getRecoMusicVol() << endl;
 			break;
 		case '0':
 			gameSound.increaseRecoMusicVol(0.1f);
+			cout << "GameMusicVol" <<  gameSound.getGameMusicVol() << endl;
 			break;
 		case '9':
 			gameSound.decreaseGameMusicVol(0.1f);
+			cout << "GameMusicVol" <<  gameSound.getGameMusicVol() << endl;
 			break;
 		case 'b':
 			gameSound.stopPlayingMusic();
@@ -193,7 +200,27 @@ void GameCore::keyPressed(int key) {
 			if (farThreshold < 0) {
 				farThreshold = 0;
 			}
+			break;
+		// decrease the time in seconds wich it thakte to the next level
+		case 'q':	
+			timeToLevelUp -= 10;
+			cout << timeToLevelUp << " gameSpeedLevelUp+10" << endl;
 			break;	
+		// increase the time in seconds wich it thakte to the next level
+		case 'w':
+			timeToLevelUp += 10;
+			cout << timeToLevelUp << " gameSpeedLevelUp-10" << endl;
+			break;
+		//decrease time in miliseconds how big the increas of "blockSpeed" per level is
+		case 'e':	
+			speedIncreaseLevel -= 10;
+			cout << speedIncreaseLevel << " speedIncreaseLevel-10" << endl;
+			break;	
+		// increase time in miliseconds how big the increas of "blockSpeed" per level is
+		case 'r':
+			speedIncreaseLevel += 10;
+			cout << speedIncreaseLevel << " speedIncreaseLevel+10" << endl;
+			break;
 		default:
 			break;
 	}
@@ -246,7 +273,8 @@ void GameCore::switchMode(int mode) {
 			isGameMode = true;
 			resetGame();
 			highscore = 0;
-			prevTime = ofGetElapsedTimeMillis();
+			elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
+			elapsedTimeForGameSpeed = ofGetElapsedTimef();
 			gameSound.playGameMusic();
 			break;
 		case 'over':
@@ -409,9 +437,33 @@ void GameCore::updateGameScreen() {
 			return;
 		}
 		deletePossibleLines();
-		pieceX = 3;
-		pieceY = 0;
+		insertNewBlockIntoGame();
+		checkElapedTime();
 	}
+}
+
+void GameCore::insertNewBlockIntoGame()
+{
+	pieceX = 3;
+	pieceY = 0;
+}
+
+void GameCore::checkElapedTime()
+{
+	if(ofGetElapsedTimef() - elapsedTimeForGameSpeed >= timeToLevelUp) {
+		increaseGamespeed(speedIncreaseLevel);
+		elapsedTimeForGameSpeed = ofGetElapsedTimef();
+
+	}
+	
+	cout << highscore << " highscore" << endl;
+	cout << timeToLevelUp << " timeToLevelUp" << endl;
+	cout << speedIncreaseLevel << " speedIncreaseLevel" << endl;
+	cout << blockSpeed << " blockSpeed" << endl;
+}
+
+void GameCore::increaseGamespeed(int miliseconds){
+	blockSpeed -= miliseconds;
 }
 
 void GameCore::resetGame() {
@@ -420,8 +472,6 @@ void GameCore::resetGame() {
 	pieceX = 0;
 	pieceY = 0;
 	blockSpeed = 1000;
-	gameSpeed = 1;
-	//highscore = 0;
 }
 
 void GameCore::drawBG() {
@@ -683,15 +733,13 @@ void GameCore::deletePossibleLines () {
 			deleteLine (j);
 		}
 	}
-
-	cout << highscore << " highscore" << endl;
-	cout << gameSpeed << " gameSpeed" << endl;
-	cout << blockSpeed << " blockSpeed" << endl;
 	
+	/* altes erhöhen von game speed
 	if((int)highscore / 300 > gameSpeed) {
 		gameSpeed++;
 		blockSpeed -= 100;
 	}
+	*/
 }
 
 void GameCore::storePiece(int scoreOfStone) {
@@ -704,3 +752,5 @@ void GameCore::storePiece(int scoreOfStone) {
 	}
 	gameSound.playSoundHitBottom();
 }
+
+

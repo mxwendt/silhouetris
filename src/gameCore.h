@@ -52,6 +52,8 @@ private:
 	void checkActiveBlocks();
 	void setPieceBlocks();
 	void updateGameScreen();
+
+
 	void resetGame();
 	bool isPossibleMove(int line, int column);
 	bool isGameOver();
@@ -59,6 +61,9 @@ private:
 	void deleteLine(int pY);
 	void deletePossibleLines();
 	void storePiece(int stone);
+	void insertNewBlockIntoGame();
+	void checkElapedTime();
+	void increaseGamespeed(int miliseconds);
 
 	void drawBG();
 	void drawSilhouette(int x, int y, int size);
@@ -85,9 +90,13 @@ private:
 	bool lastPieceBlocks[PIECEWIDTH][PIECEHEIGHT]; // last moving piece in the game
 	int gameBlocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]; // game board
 	int lastGameBlocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]; // last game board
-	int gameSpeed;
-	int prevTime;
-	int blockSpeed; // in ms
+	
+	int blockSpeed; //how many miliseconds it takes to mov a block on step down
+	int timeToLevelUp; //time in seconds wich it thakte to the next level
+	int speedIncreaseLevel; //time in miliseconds how big the increas of "blockSpeed" per level is
+	int elapsedTimeForDisplayUpdate; //in miliseconds
+	int elapsedTimeForGameSpeed; //in seconds
+
 	int pieceX;
 	int pieceY;
 	int highscore;
