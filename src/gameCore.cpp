@@ -163,7 +163,7 @@ void GameCore::keyPressed(int key) {
 		case '9':
 			gameSound.decreaseGameMusicVol(0.1f);
 			break;
-		case 'b':s
+		case 'b':
 			gameSound.stopPlayingMusic();
 			break;
 		// increase threshold to the front
