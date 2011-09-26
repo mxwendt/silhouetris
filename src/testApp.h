@@ -3,6 +3,8 @@
 
 #include "ofMain.h"
 #include "Kinect.h"
+//#include "GameStateManager.h"
+//#include "IdleState.h"
 
 #define GAMESCREENX 190
 #define GAMESCREENY 0
@@ -20,7 +22,7 @@
 #define LEFT 0 
 #define RIGHT 1
 
-class testApp : public ofBaseApp{
+class testApp : public ofBaseApp {
 public:
 	void setup();
 	void update();
@@ -64,6 +66,8 @@ private:
 	bool isRecoMode;
 	bool isGameMode;
 	bool isOverMode;
+
+	/*GameStateManager game;*/
 
 	// game variables
 	bool clearScreen;

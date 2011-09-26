@@ -30,6 +30,8 @@ void testApp::setup() {
 	nearThreshold = 1000;
 	farThreshold = 3000;
 
+	/*game.changeState(new IdleState());*/
+
 	// load external data
 	loadExternalData();
 
@@ -38,6 +40,7 @@ void testApp::setup() {
 }
 
 void testApp::update() {
+	/*game.update();*/
 	if(isIdleMode) {
 		updateDepthStream();
 		checkActiveBlocks();
@@ -66,6 +69,7 @@ void testApp::update() {
 }
 
 void testApp::draw() {
+	/*game.draw();*/
 	if(isIdleMode) {
 		ofSetColor(255, 255, 255);
 		imgLogo.draw(140, 250);
