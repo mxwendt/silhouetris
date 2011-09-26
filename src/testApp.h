@@ -3,6 +3,8 @@
 
 #include "ofMain.h"
 #include "Kinect.h"
+#include "GameStateManager.h"
+#include "IdleState.h"
 
 #define GAMESCREENX 190
 #define GAMESCREENY 0
@@ -64,6 +66,8 @@ private:
 	bool isRecoMode;
 	bool isGameMode;
 	bool isOverMode;
+
+	GameStateManager game;
 
 	// game variables
 	bool clearScreen;

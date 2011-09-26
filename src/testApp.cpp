@@ -2,10 +2,10 @@
 
 void testApp::setup() {
 	// set values
-	isIdleMode = true;
+	/*isIdleMode = true;
 	isRecoMode = false;
 	isGameMode = false;
-	isOverMode = false;
+	isOverMode = false;*/
 	clearScreen = false;
 	moveLeft = false;
 	moveRight = false;
@@ -30,6 +30,8 @@ void testApp::setup() {
 	nearThreshold = 1000;
 	farThreshold = 3000;
 
+	game.changeState(new IdleState());
+
 	// load external data
 	loadExternalData();
 
@@ -38,7 +40,8 @@ void testApp::setup() {
 }
 
 void testApp::update() {
-	if(isIdleMode) {
+	game.update();
+	/*if(isIdleMode) {
 		updateDepthStream();
 		checkActiveBlocks();
 	}
@@ -62,67 +65,68 @@ void testApp::update() {
 		updateDepthStream();
 		resetGame();
 		checkActiveBlocks();
-	}
+	}*/
 }
 
 void testApp::draw() {
-	if(isIdleMode) {
-		ofSetColor(255, 255, 255);
-		imgLogo.draw(140, 250);
-		imgCopyright.draw(415, 600);
-	}
-	else if(isRecoMode) {
-		drawBG();
-		drawSilhouette(SILHOUETTESCREENX, SILHOUETTESCREENY, SILHOUETTEBLOCKSIZE);
-		drawBoard();
-		drawPiece();
-		drawScore();
+	game.draw();
+	//if(isIdleMode) {
+	//	ofSetColor(255, 255, 255);
+	//	imgLogo.draw(140, 250);
+	//	imgCopyright.draw(415, 600);
+	//}
+	//else if(isRecoMode) {
+	//	drawBG();
+	//	drawSilhouette(SILHOUETTESCREENX, SILHOUETTESCREENY, SILHOUETTEBLOCKSIZE);
+	//	drawBoard();
+	//	drawPiece();
+	//	drawScore();
 
-		// draw cross that has to be formed by player
-		ofSetPolyMode(OF_POLY_WINDING_NONZERO);
-		ofNoFill();
-		ofSetLineWidth(3);
-		ofBeginShape();
-			ofVertex(4 * BLOCKSIZE + GAMESCREENX, GAMESCREENY);
-			ofVertex(5 * BLOCKSIZE + GAMESCREENX, GAMESCREENY);
-			ofVertex(5 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
-			ofVertex(6 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
-			ofVertex(6 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
-			ofVertex(5 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
-			ofVertex(5 * BLOCKSIZE + GAMESCREENX, 4 * BLOCKSIZE + GAMESCREENY);
-			ofVertex(4 * BLOCKSIZE + GAMESCREENX, 4 * BLOCKSIZE + GAMESCREENY);
-			ofVertex(4 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
-			ofVertex(3 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
-			ofVertex(3 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
-			ofVertex(4 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
-		ofEndShape();
-		ofFill();
-		ofSetLineWidth(1);
+	//	// draw cross that has to be formed by player
+	//	ofSetPolyMode(OF_POLY_WINDING_NONZERO);
+	//	ofNoFill();
+	//	ofSetLineWidth(3);
+	//	ofBeginShape();
+	//		ofVertex(4 * BLOCKSIZE + GAMESCREENX, GAMESCREENY);
+	//		ofVertex(5 * BLOCKSIZE + GAMESCREENX, GAMESCREENY);
+	//		ofVertex(5 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(6 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(6 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(5 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(5 * BLOCKSIZE + GAMESCREENX, 4 * BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(4 * BLOCKSIZE + GAMESCREENX, 4 * BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(4 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(3 * BLOCKSIZE + GAMESCREENX, 2 * BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(3 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
+	//		ofVertex(4 * BLOCKSIZE + GAMESCREENX, BLOCKSIZE + GAMESCREENY);
+	//	ofEndShape();
+	//	ofFill();
+	//	ofSetLineWidth(1);
 
-		ofSetColor(255, 255, 255);
-		imgRecoLabel.draw(210, 145);
-	}
-	else if(isGameMode) {
-		drawBG();
-		drawSilhouette(SILHOUETTESCREENX, SILHOUETTESCREENY, SILHOUETTEBLOCKSIZE);
-		drawBoard();
-		drawPiece();
-		drawGameOverZone();
-		drawScore();
+	//	ofSetColor(255, 255, 255);
+	//	imgRecoLabel.draw(210, 145);
+	//}
+	//else if(isGameMode) {
+	//	drawBG();
+	//	drawSilhouette(SILHOUETTESCREENX, SILHOUETTESCREENY, SILHOUETTEBLOCKSIZE);
+	//	drawBoard();
+	//	drawPiece();
+	//	drawGameOverZone();
+	//	drawScore();
 
-		ofSetColor(255, 255, 255);
-		imgGameLabel.draw(210, 145);
-	}
-	else {
-		drawBG();
-		drawSilhouette(SILHOUETTESCREENX, SILHOUETTESCREENY, SILHOUETTEBLOCKSIZE);
-		drawBoard();
-		drawGameOverZone();
-		drawScore();
+	//	ofSetColor(255, 255, 255);
+	//	imgGameLabel.draw(210, 145);
+	//}
+	//else {
+	//	drawBG();
+	//	drawSilhouette(SILHOUETTESCREENX, SILHOUETTESCREENY, SILHOUETTEBLOCKSIZE);
+	//	drawBoard();
+	//	drawGameOverZone();
+	//	drawScore();
 
-		ofSetColor(255, 255, 255);
-		imgOverLabel.draw(200, 20);
-	}
+	//	ofSetColor(255, 255, 255);
+	//	imgOverLabel.draw(200, 20);
+	//}
 }
 
 void testApp::keyPressed(int key) {
