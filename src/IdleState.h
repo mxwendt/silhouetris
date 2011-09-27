@@ -2,7 +2,7 @@
 #define _IDLE_STATE
 
 #include "GameState.h"
-#include "ofImage.h"
+#include "ofMain.h"
 
 class IdleState : public GameState {
 public:

@@ -25,7 +25,7 @@
 #define LEFT 0 
 #define RIGHT 1
 
-class GameCore : public ofBaseApp{
+class GameCore : public ofBaseApp {
 public:
 	void setup();
 	void update();
