@@ -17,8 +17,9 @@ public:
 
 	void update(ofImage* aDepthImage);
 	void drawOverlay(int aX, int aY, int aWidth, int aHeight);
+	void drawMoveButtons(int aX, int aY);
 	void drawPiece(int aX, int aY, int aWidth, int aHeight);
-	
+
 	bool isEmpty();
 	bool isCross();
 
@@ -40,6 +41,8 @@ private:
 
 	bool moveLeft;
 	bool moveRight;
+	bool lastMoveLeft;
+	bool lastMoveRight;
 
 	int sensitivity; // pixel count that makes a block active
 };

@@ -14,12 +14,12 @@ void GameCore::setup() {
 	blockSpeed = 1000;
 	timeToLevelUp = 60;
 	speedIncreaseLevel = 200;
-	elapsedTimeForGameSpeed = 0;
 
 	changeState(IDLE_STATE);
 }
 
 void GameCore::exit() {
+	// clean up
 	delete piece;
 	piece = NULL;
 	
@@ -46,13 +46,16 @@ void GameCore::update() {
 		kinect->updateDepthImage();
 		piece->update(kinect->getDepthImage());
 		if(piece->isCross()) {
-			changeState(PLAY_STATE);
+			changeState(MOVE_STATE);
 		}
 		break;
-	case PLAY_STATE:
+	case MOVE_STATE:
 		kinect->updateDepthImage();
 		piece->update(kinect->getDepthImage());
-		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > blockSpeed) {
+		/*cout << "Elapsed Millis: " << ofGetElapsedTimeMillis() << endl;
+		cout << "Elapsed Time for Update: " << elapsedTimeForDisplayUpdate << endl;
+		cout << "Counter: " << moveCounter << endl;*/
+		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > 500) {
 			if(!piece->isEmpty()) {
 				// check if move right is possible
 				if(piece->isMoveRight()) {
@@ -62,6 +65,20 @@ void GameCore::update() {
 				if(piece->isMoveLeft()) {
 					board->isPossibleMove(piece, -1, 0);
 				}
+				elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
+				moveCounter++;
+			}
+
+			if(moveCounter > 8) {
+				changeState(PLAY_STATE);
+			}
+		}
+		break;
+	case PLAY_STATE:
+		kinect->updateDepthImage();
+		piece->update(kinect->getDepthImage());
+		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > blockSpeed) {
+			if(!piece->isEmpty()) {
 				// check if move down is possible
 				if(!board->isPossibleMove(piece, 0, 1)) {
 					board->storePiece(piece, score->calcScore(piece));
@@ -73,11 +90,12 @@ void GameCore::update() {
 						board->reset();
 						piece->reset();
 						score->reset();
-						blockSpeed = 1000;
 
 						changeState(OVER_STATE);
 					}
 					checkElapsedTime();
+
+					changeState(MOVE_STATE);
 				}
 			}
 			elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
@@ -87,7 +105,7 @@ void GameCore::update() {
 		kinect->updateDepthImage();
 		piece->update(kinect->getDepthImage());
 		if(piece->isCross()) {
-			changeState(PLAY_STATE);
+			changeState(MOVE_STATE);
 		}
 		break;
 	default:
@@ -104,6 +122,13 @@ void GameCore::draw() {
 		images.drawRecoState();
 		kinect->drawDepthImage(499, 24, 500, 480);
 		piece->drawOverlay(569, 24, 360, 480);
+		board->draw(piece);
+		score->draw(499, 695);
+		break;
+	case MOVE_STATE:
+		images.drawPlayState();
+		kinect->drawDepthImage(499, 24, 500, 480);
+		piece->drawMoveButtons(569, 24);
 		board->draw(piece);
 		score->draw(499, 695);
 		break;
@@ -134,34 +159,34 @@ void GameCore::keyPressed(int aKey) {
 	case '2': 
 		changeState(RECO_STATE);
 		break;
-	case '3':  
-		changeState(PLAY_STATE);
+	case '3': 
+		changeState(MOVE_STATE);
 		break;
 	case '4':  
+		changeState(PLAY_STATE);
+		break;
+	case '5':  
 		changeState(OVER_STATE);
 		break;
-	/*case '5': 
-		deleteLine(18); 
-		break;*/
-	case '6':
+	case 'a':
 		sound.increaseIdleMusicVol(0.1f);
 		break;
-	case '5':
+	case 's':
 		sound.decreaseIdleMusicVol(0.1f);
 		break;
-	case '8':
+	case 'd':
 		sound.increaseRecoMusicVol(0.1f);
 		break;
-	case '7':
+	case 'f':
 		sound.decreaseRecoMusicVol(0.1f);
 		break;
-	case '0':
+	case 'g':
 		sound.increasePlayMusicVol(0.1f);
 		break;
-	case '9':
+	case 'h':
 		sound.decreasePlayMusicVol(0.1f);
 		break;
-	case 'b':
+	case 'j':
 		sound.stopPlayingMusic();
 		break;
 	// increase threshold to the front
@@ -207,20 +232,33 @@ void GameCore::changeState(int aState) {
 
 	switch(aState) {
 	case IDLE_STATE:
+		cout << "IDLE_STATE" << endl;
 		state = IDLE_STATE;
 		sound.playIdleMusic();
 		break;
 	case RECO_STATE:
+		cout << "RECO_STATE" << endl;
 		state = RECO_STATE;
 		sound.playRecoMusic();
 		break;
+	case MOVE_STATE:
+		cout << "MOVE_STATE" << endl;
+		state = MOVE_STATE;
+		sound.playPlayMusic();
+		moveCounter = 0;
+		elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
+		break;
 	case PLAY_STATE:
+		cout << "PLAY_STATE" << endl;
 		state = PLAY_STATE;
 		sound.playPlayMusic();
+		elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
 		break;
 	case OVER_STATE:
+		cout << "OVER_STATE" << endl;
 		state = OVER_STATE;
 		sound.playIdleMusic();
+		blockSpeed = 1000;
 		break;
 	default:
 		break;

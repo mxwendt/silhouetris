@@ -12,6 +12,7 @@
 typedef enum {
 	IDLE_STATE,
 	RECO_STATE,
+	MOVE_STATE,
 	PLAY_STATE,
 	OVER_STATE
 } GameState;
@@ -40,6 +41,8 @@ private:
 	Board* board;
 	Score* score;
 	Kinect* kinect;
+
+	int moveCounter;
 
 	int elapsedTimeForDisplayUpdate; // in ms
 	int elapsedTimeForGameSpeed; // in s

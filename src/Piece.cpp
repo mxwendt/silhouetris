@@ -40,7 +40,6 @@ void Piece::update(ofImage* aDepthImage) {
 
 void Piece::drawOverlay(int aX, int aY, int aWidth, int aHeight) {
 	ofEnableAlphaBlending();
-	// draw blocks overlay
 	ofSetColor(186, 205, 54, 80);
 	for(int i = 0; i < PIECE_COLUMNS; i++) {
 		for(int j = 0; j < PIECE_ROWS; j++) {
@@ -49,8 +48,11 @@ void Piece::drawOverlay(int aX, int aY, int aWidth, int aHeight) {
 			}
 		}
 	}
+	ofDisableAlphaBlending();
+}
 
-	// draw move buttons overlay
+void Piece::drawMoveButtons(int aX, int aY) {
+	ofEnableAlphaBlending();
 	ofSetColor(255, 0, 0, 80);
 	if(moveLeft) {
 		ofRect(aX - 70, aY, 70, 480);

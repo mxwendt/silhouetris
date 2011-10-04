@@ -68,7 +68,7 @@ void Board::draw(Piece* aPiece) {
 	// draw piece background
 	ofEnableAlphaBlending();
 	ofSetColor(186, 205, 54, 80);
-	ofRect(37 + pieceX * 40, 0 + pieceY * 40, 120, 160);
+	ofRect(37 + pieceX * 40, 0, 120, 760);
 	ofDisableAlphaBlending();
 
 	// draw piece
@@ -150,7 +150,7 @@ int Board::deleteLines() {
 }
 
 void Board::insertNewPiece() {
-	pieceX = 3;
+	//pieceX = 3;
 	pieceY = 0;
 }
 
