@@ -4,21 +4,20 @@
 #include "ofMain.h"
 
 class GameSound {
-
 public:
-
+	///////////////////////////////////////////////////////////////
 	void loadSoundFiles();
-	void increaseIdleMusicVol(float volume);
-	void increaseRecoMusicVol(float volume);
-	void increaseGameMusicVol(float volume);
+	void increaseIdleMusicVol(float aVolume);
+	void increaseRecoMusicVol(float aVolume);
+	void increasePlayMusicVol(float aVolume);
 
-	void decreaseIdleMusicVol(float volume);
-	void decreaseRecoMusicVol(float volume);
-	void decreaseGameMusicVol(float volume);
+	void decreaseIdleMusicVol(float aVolume);
+	void decreaseRecoMusicVol(float aVolume);
+	void decreasePlayMusicVol(float aVolume);
 
 	float getIdleMusicVol();
 	float getRecoMusicVol();
-	float getGameMusicVol();
+	float getPlayMusicVol();
 
 	void loadMusic();
 	void loadSounds();
@@ -28,28 +27,27 @@ public:
 	void stopPlayingMusic();
 	void playIdleMusic();
 	void playRecoMusic();
-	void playGameMusic();
+	void playPlayMusic();
 
 	void playSoundClearLine();
 	void playSoundHitBottom();
 	void playSoundGameOver();
 
 private:
+	///////////////////////////////////////////////////////////////
+	static const int DEFAULT_IDLE_MUSIC_VOL = 1;
+	static const int DEFAULT_RECO_MUSIC_VOL = 1;
+	static const int DEFAULT_PLAY_MUSIC_VOL = 1;
+	static const int DEFAULT_FINISHED_LINE_VOL = 1;
+	static const int DEFAULT_STONE_HIT_GROUND_VOL = 1;
+	static const int DEFAULT_GAME_OVER_VOL = 1;
+
 	ofSoundPlayer soundClearLine;
 	ofSoundPlayer soundHitBottom;
 	ofSoundPlayer soundGameOver;
 	ofSoundPlayer musicIdle;
 	ofSoundPlayer musicReco;
-	ofSoundPlayer musicGame;
-
-	static const float DEFAULT_IDEL_MUSIC_VOL;
-	static const float DEAULT_RECO_MUSIC_VOL;
-	static const float DEFAULT_GAME_MUSIC_VOL;
-	static const float DEFAULT_FINISHED_LINE_VOL;
-	static const float DEFAULT_STONE_HIT_Ground_VOL;
-	static const float DEFAULT_GAME_OVER_VOL;
+	ofSoundPlayer musicPlay;
 };
-
-
 
 #endif

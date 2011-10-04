@@ -116,30 +116,23 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameStateManager.cpp" />
-    <ClCompile Include="src\IdleState.cpp" />
-    <ClCompile Include="src\gameImages.cpp" />
-    <ClCompile Include="src\gameCore.cpp" />
-    <ClCompile Include="src\gameLogic.cpp" />
-    <ClCompile Include="src\gameSound.cpp" />
-    <ClCompile Include="src\graficEngine.cpp" />
+    <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\GameImages.cpp" />
+    <ClCompile Include="src\GameCore.cpp" />
+    <ClCompile Include="src\GameSound.cpp" />
     <ClCompile Include="src\Kinect.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\testApp.cpp" />
-    <ClCompile Include="src\userImput.cpp" />
+    <ClCompile Include="src\Piece.cpp" />
+    <ClCompile Include="src\Score.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GameState.h" />
-    <ClInclude Include="src\GameStateManager.h" />
-    <ClInclude Include="src\IdleState.h" />
-    <ClInclude Include="src\gameImages.h" />
-    <ClInclude Include="src\gameCore.h" />
-    <ClInclude Include="src\gameLogic.h" />
-    <ClInclude Include="src\gameSound.h" />
-    <ClInclude Include="src\graficEngine.h" />
+    <ClInclude Include="src\Board.h" />
+    <ClInclude Include="src\GameImages.h" />
+    <ClInclude Include="src\GameCore.h" />
+    <ClInclude Include="src\GameSound.h" />
     <ClInclude Include="src\Kinect.h" />
-    <ClInclude Include="src\testApp.h" />
-    <ClInclude Include="src\userImput.h" />
+    <ClInclude Include="src\Piece.h" />
+    <ClInclude Include="src\Score.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs2010\openframeworksLib.vcxproj">
@@ -154,22 +147,15 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <None Include="bin\data\b4.jpg" />
     <None Include="bin\data\b5.jpg" />
     <None Include="bin\data\b6.jpg" />
-    <None Include="bin\data\copyright.jpg" />
-    <None Include="bin\data\gameLabel.jpg" />
-    <None Include="bin\data\gameover.wav" />
-    <None Include="bin\data\hit.wav" />
-    <None Include="bin\data\leftWall.jpg" />
-    <None Include="bin\data\line.wav" />
-    <None Include="bin\data\logo.jpg" />
-    <None Include="bin\data\musicGame.mp3" />
-    <None Include="bin\data\musicIdle.mp3" />
-    <None Include="bin\data\musicReco.mp3" />
-    <None Include="bin\data\outline.jpg" />
-    <None Include="bin\data\overLabel.jpg" />
+    <None Include="bin\data\bg.png" />
+    <None Include="bin\data\sound-gameover.wav" />
+    <None Include="bin\data\sound-hit.wav" />
+    <None Include="bin\data\sound-line.wav" />
+    <None Include="bin\data\logo.png" />
+    <None Include="bin\data\music-idle.mp3" />
+    <None Include="bin\data\music-play.mp3" />
+    <None Include="bin\data\music-reco.mp3" />
     <None Include="bin\data\pixelart.ttf" />
-    <None Include="bin\data\recoLabel.jpg" />
-    <None Include="bin\data\rightWall.jpg" />
-    <None Include="bin\data\scoreBG.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

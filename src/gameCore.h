@@ -1,138 +1,51 @@
 #ifndef _GAME_CORE
 #define _GAME_CORE
 
-#include "ofMain.h"
+#include "GameSound.h"
+#include "GameImages.h"
+#include "Piece.h"
+#include "Board.h"
+#include "Score.h"
 #include "Kinect.h"
-#include "gameSound.h"
-#include "userImput.h"
-#include "gameLogic.h"
-#include "graficEngine.h"
-//#include "gameImages.h"
+#include "ofMain.h"
 
-#define GAMESCREENX 190
-#define GAMESCREENY 0
-#define GAMESCREENWIDTH	10 // in blocks
-#define GAMESCREENHEIGHT 18 // in blocks
-#define SILHOUETTESCREENX 730
-#define SILHOUETTESCREENY 50
-#define SILHOUETTEBLOCKSIZE 110
-#define RECOSCREENX 670
-#define RECOSCREENY 50
-#define RECOBLOCKSIZE 150 
-#define BLOCKSIZE 40
-#define PIECEWIDTH 3 // in blocks
-#define PIECEHEIGHT 4 // in blocks
-#define LEFT 0 
-#define RIGHT 1
+typedef enum {
+	IDLE_STATE,
+	RECO_STATE,
+	PLAY_STATE,
+	OVER_STATE
+} GameState;
 
 class GameCore : public ofBaseApp {
 public:
+	///////////////////////////////////////////////////////////////
 	void setup();
+	void exit();
+
 	void update();
 	void draw();
 
-	void keyPressed(int key);
-	void windowResized(int w, int h);
-
-	GameSound gameSound;
-	GameLogic gameLogic;
-	UserImput userImput;
-	GraficEngine graficEngine;
-//	GameImages gameImages;
+	void keyPressed(int aKey);
 
 private:
-	void loadExternalData();
+	///////////////////////////////////////////////////////////////
+	void changeState(int aState);
+	void checkElapsedTime();
 
-	void switchMode(int mode);
+	GameState state;
+	GameSound sound;
+	GameImages images;
 
-	void clearPieceBlocks(bool blocks[PIECEWIDTH][PIECEHEIGHT]);
-	void clearGameBlocks(int blocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]);
-	void updateDepthStream();
-	void setActiveBlock(unsigned char* pixels, int line, int col);
-	void checkActiveBlocks();
-	void setPieceBlocks();
-	void updateGameScreen();
-
-
-	void resetGame();
-	bool isPossibleMove(int line, int column);
-	bool isGameOver();
-	void setMoveBlock(unsigned char* pixels, int direction);
-	void deleteLine(int pY);
-	void deletePossibleLines();
-	void storePiece(int stone);
-	void insertNewBlockIntoGame();
-	void checkElapedTime();
-	void increaseGamespeed(int miliseconds);
-
-	void drawBG();
-	void drawSilhouette(int x, int y, int size);
-	void drawBoard();
-	void drawPiece();
-	void drawGameOverZone();
-	void drawScore();
-
-	int calcScore();
-	int addUpScore(int line);
-
-	// game states
-	bool isIdleMode;
-	bool isRecoMode;
-	bool isGameMode;
-	bool isOverMode;
-
-	// game variables
-	bool clearScreen;
-	bool moveLeft;
-	bool moveRight;
-	bool activeBlocks[PIECEWIDTH][PIECEHEIGHT]; // block layover over silhouette
-	bool pieceBlocks[PIECEWIDTH][PIECEHEIGHT]; // moving piece in the game
-	bool lastPieceBlocks[PIECEWIDTH][PIECEHEIGHT]; // last moving piece in the game
-	int gameBlocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]; // game board
-	int lastGameBlocks[GAMESCREENWIDTH][GAMESCREENHEIGHT]; // last game board
-	
-	int blockSpeed; //how many miliseconds it takes to mov a block on step down
-	int timeToLevelUp; //time in seconds wich it thakte to the next level
-	int speedIncreaseLevel; //time in miliseconds how big the increas of "blockSpeed" per level is
-	int elapsedTimeForDisplayUpdate; //in miliseconds
-	int elapsedTimeForGameSpeed; //in seconds
-
-	int pieceX;
-	int pieceY;
-	int highscore;
-	int lasthighscore;
-	int complexCalc;
-	float complexCalcR0;
-	float complexCalcR1;
-	float complexCalcR2;
-	float complexCalcR3;
-	
-	//images
-	ofImage	imgLogo;
-	ofImage	imgCopyright;
-	ofImage	imgLeftWall;
-	ofImage	imgRightWall;
-	ofImage	imgScoreBG;
-	ofImage imgB1; // 40x40 px block
-	ofImage imgB2; // 40x40 px block
-	ofImage imgB3; // 40x40 px block
-	ofImage imgB4; // 40x40 px block
-	ofImage imgB5; // 40x40 px block
-	ofImage imgB6; // 40x40 px block
-	ofImage imgRecoLabel;
-	ofImage imgGameLabel;
-	ofImage imgOverLabel;
-	ofImage imgOutline;
-
-	//font
-	ofTrueTypeFont font; // should still be changed to "gunship bitmap"
-
-	//
-	ofImage depthMask;
-	ofImage	depthStream;
+	Piece* piece;
+	Board* board;
+	Score* score;
 	Kinect* kinect;
-	int nearThreshold; // distance in mm
-	int farThreshold; // distance in mm
+
+	int elapsedTimeForDisplayUpdate; // in ms
+	int elapsedTimeForGameSpeed; // in s
+	int timeToLevelUp; // time in s which it thakes to the next level
+	int speedIncreaseLevel; // time in ms how big the increase of "blockSpeed" per level is
+	int blockSpeed; // ms that it takes to move a piece one step down
 };
 
 #endif

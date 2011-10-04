@@ -1,12 +1,6 @@
 #include "gameSound.h"
 
-const float GameSound::DEFAULT_IDEL_MUSIC_VOL = 1.0f;
-const float GameSound::DEAULT_RECO_MUSIC_VOL = 1.0f;
-const float GameSound::DEFAULT_GAME_MUSIC_VOL=1.0f;
-const float GameSound::DEFAULT_FINISHED_LINE_VOL = 1.0f;
-const float GameSound::DEFAULT_STONE_HIT_Ground_VOL = 1.0f;
-const float GameSound::DEFAULT_GAME_OVER_VOL = 1.0f;
-
+///////////////////////////////////////////////////////////////
 void GameSound::loadSoundFiles() {
 	loadMusic();
 	loadSounds();
@@ -15,28 +9,28 @@ void GameSound::loadSoundFiles() {
 void GameSound::loadMusic()
 {
 	setDefaultMusicValues();
-	musicIdle.loadSound("musicIdle.mp3", true); // gets streamed
-	musicReco.loadSound("musicReco.mp3", true); // gets streamed
-	musicGame.loadSound("musicGame.mp3", true);	// gets streamed
+	musicIdle.loadSound("music-idle.mp3", true); // gets streamed
+	musicReco.loadSound("music-reco.mp3", true); // gets streamed
+	musicPlay.loadSound("music-play.mp3", true); // gets streamed
 }
 
 void GameSound::loadSounds()
 {
 	setDefaultSoundValues();
-	soundClearLine.loadSound("line.wav");
-	soundHitBottom.loadSound("hit.wav");
-	soundGameOver.loadSound("gameover.wav");
+	soundClearLine.loadSound("sound-line.wav");
+	soundHitBottom.loadSound("sound-hit.wav");
+	soundGameOver.loadSound("sound-gameover.wav");
 }
 
 void GameSound::setDefaultMusicValues()
 {
-	musicIdle.setVolume(DEFAULT_IDEL_MUSIC_VOL);
-	musicReco.setVolume(DEAULT_RECO_MUSIC_VOL);
-	musicGame.setVolume(DEFAULT_GAME_MUSIC_VOL);
+	musicIdle.setVolume(DEFAULT_IDLE_MUSIC_VOL);
+	musicReco.setVolume(DEFAULT_RECO_MUSIC_VOL);
+	musicPlay.setVolume(DEFAULT_PLAY_MUSIC_VOL);
 
 	musicIdle.setLoop(true);
 	musicReco.setLoop(true);
-	musicGame.setLoop(true);
+	musicPlay.setLoop(true);
 }
 
 void GameSound::setDefaultSoundValues()
@@ -45,38 +39,38 @@ void GameSound::setDefaultSoundValues()
 	soundHitBottom.setMultiPlay(true);
 
 	soundClearLine.setVolume(DEFAULT_FINISHED_LINE_VOL);
-	soundHitBottom.setVolume(DEFAULT_STONE_HIT_Ground_VOL);
+	soundHitBottom.setVolume(DEFAULT_STONE_HIT_GROUND_VOL);
 	soundGameOver.setVolume(DEFAULT_GAME_OVER_VOL);
 }
 
-void GameSound::increaseIdleMusicVol(float volume){
+void GameSound::increaseIdleMusicVol(float aVolume){
 	if (musicIdle.volume < 1){
-		musicIdle.setVolume(musicIdle.volume += volume);
+		musicIdle.setVolume(musicIdle.volume += aVolume);
 	}	
 }
-void GameSound::increaseRecoMusicVol(float volume){
+void GameSound::increaseRecoMusicVol(float aVolume){
 	if (musicReco.volume < 1){
-		musicReco.setVolume(musicReco.volume += volume);
+		musicReco.setVolume(musicReco.volume += aVolume);
 	}
 }
-void GameSound::increaseGameMusicVol(float volume){
-	if (musicGame.volume < 1){
-		musicGame.setVolume(musicGame.volume += volume);
+void GameSound::increasePlayMusicVol(float aVolume){
+	if (musicPlay.volume < 1){
+		musicPlay.setVolume(musicPlay.volume += aVolume);
 	}
 }
-void GameSound::decreaseIdleMusicVol(float volume){
+void GameSound::decreaseIdleMusicVol(float aVolume){
 	if (musicIdle.volume > 0){
-		musicIdle.setVolume(musicIdle.volume -= volume);
+		musicIdle.setVolume(musicIdle.volume -= aVolume);
 	}
 }
-void GameSound::decreaseRecoMusicVol(float volume){
+void GameSound::decreaseRecoMusicVol(float aVolume){
 	if (musicReco.volume > 0){
-		musicReco.setVolume(musicReco.volume -= volume);
+		musicReco.setVolume(musicReco.volume -= aVolume);
 	}
 }
-void GameSound::decreaseGameMusicVol(float volume){
-	if(musicGame.volume >0){
-		musicGame.setVolume(musicGame.volume -= volume);
+void GameSound::decreasePlayMusicVol(float aVolume){
+	if(musicPlay.volume >0){
+		musicPlay.setVolume(musicPlay.volume -= aVolume);
 	}
 }
 
@@ -88,8 +82,8 @@ float GameSound::getRecoMusicVol(){
 	return musicReco.volume;
 }
 
-float GameSound::getGameMusicVol(){
-	return musicGame.volume;
+float GameSound::getPlayMusicVol(){
+	return musicPlay.volume;
 }
 
 void GameSound::stopPlayingMusic(){
@@ -99,20 +93,20 @@ void GameSound::stopPlayingMusic(){
 	if(musicReco.isStreaming) {
 		musicReco.stop();
 	}
-	if(musicGame.isStreaming) {
-		musicGame.stop();
+	if(musicPlay.isStreaming) {
+		musicPlay.stop();
 	}
 }
 
 void GameSound::playIdleMusic(){
-	musicIdle.play();
 	musicIdle.setPosition(0.1f); // this is specific for the current idle sound
+	musicIdle.play();
 }
 void GameSound::playRecoMusic(){
 	musicReco.play();
 }
-void GameSound::playGameMusic(){
-	musicGame.play();
+void GameSound::playPlayMusic(){
+	musicPlay.play();
 }
 void GameSound::playSoundClearLine(){
 	soundClearLine.play();

@@ -4,11 +4,24 @@
 #include "ofMain.h"
 
 class GameImages {
-
 public:
-	void init();
-private:
+	///////////////////////////////////////////////////////////////
+	GameImages();
+	~GameImages();
 
+	///////////////////////////////////////////////////////////////
+	void drawIdleState();
+	void drawRecoState();
+	void drawPlayState();
+	void drawOverState();
+
+private:
+	///////////////////////////////////////////////////////////////
+	ofImage logo;
+	ofImage copyright;
+	ofImage wallLeft;
+	ofImage wallRight;
+	ofImage score;
 };
 
 #endif
