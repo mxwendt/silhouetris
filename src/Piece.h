@@ -27,6 +27,8 @@ public:
 	bool isMoveLeft();
 	bool isMoveRight();
 
+	void changeSensitivity(int aValue);
+
 	void reset();
 
 private:

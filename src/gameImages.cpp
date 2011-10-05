@@ -21,7 +21,7 @@ void GameImages::drawIdleState() {
 
 void GameImages::drawRecoState() {
 	ofSetColor(255, 255, 255);
-	ofRect(37, 0, 400, 768);
+	ofRect(37, 0, 400, 760);
 	wallLeft.draw(0, 0);
 	wallRight.draw(437, 0);
 	score.draw(474, 551);
@@ -29,7 +29,7 @@ void GameImages::drawRecoState() {
 
 void GameImages::drawPlayState() {
 	ofSetColor(255, 255, 255);
-	ofRect(37, 0, 400, 768);
+	ofRect(37, 0, 400, 760);
 	wallLeft.draw(0, 0);
 	wallRight.draw(437, 0);
 	score.draw(474, 551);
@@ -37,7 +37,7 @@ void GameImages::drawPlayState() {
 
 void GameImages::drawOverState() {
 	ofSetColor(255, 255, 255);
-	ofRect(37, 0, 400, 768);
+	ofRect(37, 0, 400, 760);
 	wallLeft.draw(0, 0);
 	wallRight.draw(437, 0);
 	score.draw(474, 551);

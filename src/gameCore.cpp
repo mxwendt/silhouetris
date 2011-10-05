@@ -52,9 +52,6 @@ void GameCore::update() {
 	case MOVE_STATE:
 		kinect->updateDepthImage();
 		piece->update(kinect->getDepthImage());
-		/*cout << "Elapsed Millis: " << ofGetElapsedTimeMillis() << endl;
-		cout << "Elapsed Time for Update: " << elapsedTimeForDisplayUpdate << endl;
-		cout << "Counter: " << moveCounter << endl;*/
 		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > 500) {
 			if(!piece->isEmpty()) {
 				// check if move right is possible
@@ -90,11 +87,9 @@ void GameCore::update() {
 						board->reset();
 						piece->reset();
 						score->reset();
-
 						changeState(OVER_STATE);
 					}
 					checkElapsedTime();
-
 					changeState(MOVE_STATE);
 				}
 			}
@@ -205,11 +200,11 @@ void GameCore::keyPressed(int aKey) {
 	case '.':
 		kinect->changeThreshold(0, -50);
 		break;
-	// decrease the time in s wich it thakes to the next level
+	// decrease time in s which it takes to the next level
 	case 'q':	
 		timeToLevelUp -= 10;
 		break;	
-	// increase the time in s wich it thakes to the next level
+	// increase time in s which it takes to the next level
 	case 'w':
 		timeToLevelUp += 10;
 		break;
@@ -220,6 +215,14 @@ void GameCore::keyPressed(int aKey) {
 	// increase time in ms how big the increase of "blockSpeed" per level is
 	case 'r':
 		speedIncreaseLevel += 10;
+		break;
+	// decrease pixels it takes to activate a block for the piece
+	case 'k':
+		piece->changeSensitivity(-10);
+		break;
+	// increase pixels it takes to activate a block for the piece
+	case 'l':
+		piece->changeSensitivity(10);
 		break;
 	default:
 		break;
@@ -269,6 +272,5 @@ void GameCore::checkElapsedTime() {
 	if(ofGetElapsedTimef() - elapsedTimeForGameSpeed >= timeToLevelUp) {
 		blockSpeed -= speedIncreaseLevel;
 		elapsedTimeForGameSpeed = ofGetElapsedTimef();
-
 	}
 }

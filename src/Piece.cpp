@@ -125,6 +125,16 @@ void Piece::reset() {
 	}
 }
 
+void Piece::changeSensitivity(int aValue) {
+	sensitivity += aValue;
+	if(sensitivity < 0) {
+		sensitivity = 0;
+	}
+	if(sensitivity > PIECE_WIDTH * PIECE_HEIGHT) {
+		sensitivity = PIECE_WIDTH * PIECE_HEIGHT
+	}
+}
+
 ///////////////////////////////////////////////////////////////
 void Piece::setActiveBlock(unsigned char* aPixels, int aCol, int aRow) {
 	int counter = 0;
