@@ -46,6 +46,7 @@ void GameCore::update() {
 		buttons->update(kinect->getImages());
 		if(!piece->isEmpty()) {
 			changeState(RECO_STATE);
+			break;
 		}
 		break;
 	case RECO_STATE:
@@ -54,12 +55,12 @@ void GameCore::update() {
 		piece->update(kinect->getImages());
 		if(piece->isCross()) {
 			changeState(MOVE_STATE);
+			break;
 		}
 		break;
 	case MOVE_STATE:
 		kinect->updateDepthImage();
 		kinect->separateImage();
-		//piece->update(kinect->getImages());
 		buttons->update(kinect->getImages());
 		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > 500) {
 			if(!piece->isEmpty()) {
@@ -73,10 +74,15 @@ void GameCore::update() {
 				}
 				elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
 				moveCounter++;
+
+				if(moveCounter % 2 == 0) {
+					counter--;
+				}
 			}
 
-			if(moveCounter > 8) {
+			if(moveCounter > 9) {
 				changeState(PLAY_STATE);
+				break;
 			}
 		}
 		break;
@@ -84,7 +90,7 @@ void GameCore::update() {
 		kinect->updateDepthImage();
 		kinect->separateImage();
 		piece->update(kinect->getImages());
-		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > blockSpeed) {
+		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate >= blockSpeed) {
 			if(!piece->isEmpty()) {
 				// check if move down is possible
 				if(!board->isPossibleMove(piece, 0, 1)) {
@@ -94,10 +100,8 @@ void GameCore::update() {
 					sound.playSoundClearLine();
 					board->insertNewPiece();
 					if(board->isGameOver()) {
-						board->reset();
-						piece->reset();
-						score->reset();
 						changeState(OVER_STATE);
+						break;
 					}
 					checkElapsedTime();
 					changeState(MOVE_STATE);
@@ -111,7 +115,10 @@ void GameCore::update() {
 		kinect->separateImage();
 		piece->update(kinect->getImages());
 		if(piece->isCross()) {
+			board->reset();
+			score->reset();
 			changeState(MOVE_STATE);
+			break;
 		}
 		break;
 	default:
@@ -130,7 +137,7 @@ void GameCore::draw() {
 		piece->drawOverlay(569, 24, 360, 480);
 		images.drawOutline(false);
 		board->draw(piece);
-		score->draw(499, 695);
+		score->draw(509, 695);
 		break;
 	case MOVE_STATE:
 		images.drawPlayState();
@@ -139,7 +146,11 @@ void GameCore::draw() {
 		buttons->drawMoveButtons(569, 24);
 		images.drawOutline(true);
 		board->draw(piece);
-		score->draw(499, 695);
+		score->draw(509, 695);
+		score->drawCounter(600, 90, counter);
+		if(moveCounter % 2 == 0) {
+			
+		}
 		break;
 	case PLAY_STATE:
 		images.drawPlayState();
@@ -147,14 +158,15 @@ void GameCore::draw() {
 		piece->drawOverlay(569, 24, 360, 480);
 		images.drawOutline(false);
 		board->draw(piece);
-		score->draw(499, 695);
+		score->draw(509, 695);
 		break;
 	case OVER_STATE:
 		images.drawOverState();
 		kinect->drawBlockImages();
 		piece->drawOverlay(569, 24, 360, 480);
+		images.drawOutline(false);
 		board->draw(piece);
-		score->draw(499, 695);
+		score->draw(509, 695);
 		break;
 	default:
 		break;
@@ -253,32 +265,32 @@ void GameCore::changeState(int aState) {
 	switch(aState) {
 	case IDLE_STATE:
 		cout << "IDLE_STATE" << endl;
-		state = IDLE_STATE;
 		sound.playIdleMusic();
+		state = IDLE_STATE;
 		break;
 	case RECO_STATE:
 		cout << "RECO_STATE" << endl;
+		sound.playRecoMusic();;
 		state = RECO_STATE;
-		sound.playRecoMusic();
 		break;
 	case MOVE_STATE:
-		cout << "MOVE_STATE" << endl;
-		state = MOVE_STATE;
-		sound.playPlayMusic();
+		cout << "MOVE_STATE" << endl;	
+		//sound.playPlayMusic();
 		moveCounter = 0;
+		counter = 4;
 		elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
+		state = MOVE_STATE;
 		break;
 	case PLAY_STATE:
 		cout << "PLAY_STATE" << endl;
-		state = PLAY_STATE;
-		sound.playPlayMusic();
+		//sound.playPlayMusic();
 		elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
+		state = PLAY_STATE;
 		break;
 	case OVER_STATE:
 		cout << "OVER_STATE" << endl;
-		state = OVER_STATE;
 		sound.playIdleMusic();
-		blockSpeed = 1000;
+		state = OVER_STATE;
 		break;
 	default:
 		break;

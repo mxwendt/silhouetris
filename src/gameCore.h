@@ -45,6 +45,7 @@ private:
 	Kinect* kinect;
 
 	int moveCounter;
+	int counter;
 
 	int elapsedTimeForDisplayUpdate; // in ms
 	int elapsedTimeForGameSpeed; // in s

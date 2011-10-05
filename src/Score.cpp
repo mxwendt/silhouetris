@@ -2,7 +2,7 @@
 
 ///////////////////////////////////////////////////////////////
 Score::Score() {
-	font.loadFont("pixelart.ttf", 44);
+	font.loadFont("8bitoperator_jve.ttf", 44);
 
 	highscore = 0;
 }
@@ -19,6 +19,13 @@ void Score::draw(int aX, int aY) {
 	ofSetColor(39, 40, 32);
 	stringstream ss;
 	ss << highscore;
+	font.drawString(ss.str(), aX, aY);
+}
+
+void Score::drawCounter(int aX, int aY, int aValue) {
+	ofSetColor(39, 40, 32);
+	stringstream ss;
+	ss << aValue;
 	font.drawString(ss.str(), aX, aY);
 }
 

@@ -76,7 +76,7 @@ void GameImages::drawOutline(bool aSeperator) {
 		outMoveRight.draw(999, 13);
 		outMoveTop.draw(499, 13);
 		outMoveBottom.draw(499, 504);
-		outMoveSepLeft.draw(569, 24);
-		outMoveSepRight.draw(918, 24);
+		outMoveSepLeft.draw(558, 24);
+		outMoveSepRight.draw(929, 24);
 	}
 }

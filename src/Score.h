@@ -14,6 +14,8 @@ public:
 	void update(int aValue);
 	void draw(int aX, int aY);
 
+	void drawCounter(int aX, int aY, int aValue);
+
 	int calcScore(Piece* aPiece);
 	void reset();
 

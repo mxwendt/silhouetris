@@ -18,6 +18,7 @@ void GameSound::loadSounds() {
 	soundClearLine.loadSound("sound-line.wav");
 	soundHitBottom.loadSound("sound-hit.wav");
 	soundGameOver.loadSound("sound-gameover.wav");
+	soundBeep.loadSound("sound-beep.wav");
 }
 
 void GameSound::setDefaultMusicValues() {
@@ -37,6 +38,7 @@ void GameSound::setDefaultSoundValues() {
 	soundClearLine.setVolume(DEFAULT_FINISHED_LINE_VOL);
 	soundHitBottom.setVolume(DEFAULT_STONE_HIT_GROUND_VOL);
 	soundGameOver.setVolume(DEFAULT_GAME_OVER_VOL);
+	soundBeep.setVolume(DEFAULT_BEEP_VOL);
 }
 
 void GameSound::increaseIdleMusicVol(float aVolume) {
@@ -98,18 +100,27 @@ void GameSound::playIdleMusic() {
 	musicIdle.setPosition(0.1f); // this is specific for the current idle sound
 	musicIdle.play();
 }
+
 void GameSound::playRecoMusic() {
 	musicReco.play();
 }
+
 void GameSound::playPlayMusic() {
 	musicPlay.play();
 }
+
 void GameSound::playSoundClearLine() {
 	soundClearLine.play();
 }
+
 void GameSound::playSoundHitBottom() {
 	soundHitBottom.play();
 }
+
 void GameSound::playSoundGameOver() {
 	soundGameOver.play();
+}
+
+void GameSound::playSoundBeep() {
+	soundBeep.play();
 }

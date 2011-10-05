@@ -32,6 +32,7 @@ public:
 	void playSoundClearLine();
 	void playSoundHitBottom();
 	void playSoundGameOver();
+	void playSoundBeep();
 
 private:
 	///////////////////////////////////////////////////////////////
@@ -41,10 +42,12 @@ private:
 	static const int DEFAULT_FINISHED_LINE_VOL = 1;
 	static const int DEFAULT_STONE_HIT_GROUND_VOL = 1;
 	static const int DEFAULT_GAME_OVER_VOL = 1;
+	static const int DEFAULT_BEEP_VOL = 1;
 
 	ofSoundPlayer soundClearLine;
 	ofSoundPlayer soundHitBottom;
 	ofSoundPlayer soundGameOver;
+	ofSoundPlayer soundBeep;
 	ofSoundPlayer musicIdle;
 	ofSoundPlayer musicReco;
 	ofSoundPlayer musicPlay;
