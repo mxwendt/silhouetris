@@ -12,11 +12,14 @@ public:
 
 	///////////////////////////////////////////////////////////////
 	void updateDepthImage();
+	void separateImage();
 	void drawDepthImage(int aX, int aY, int aW, int aH);
+	void drawBlockImages();
+	void drawButtonImages();
 
 	void changeThreshold(int aNear, int aFar);
 
-	ofImage* getDepthImage();
+	vector<ofImage*> getImages();
 
 private:
 	///////////////////////////////////////////////////////////////
@@ -26,7 +29,22 @@ private:
 
 	unsigned char* depthPixels;
 	ofImage* depthMask;
-	ofImage* depthImage;
+	ofImage* depthButtonLeft;
+	ofImage* depthButtonRight;
+	ofImage* depthBlock00;
+	ofImage* depthBlock01;
+	ofImage* depthBlock02;
+	ofImage* depthBlock03;
+	ofImage* depthBlock10;
+	ofImage* depthBlock11;
+	ofImage* depthBlock12;
+	ofImage* depthBlock13;
+	ofImage* depthBlock20;
+	ofImage* depthBlock21;
+	ofImage* depthBlock22;
+	ofImage* depthBlock23;
+
+	vector<ofImage*> images;
 
 	int nearThreshold;
 	int farThreshold;

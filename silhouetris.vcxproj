@@ -122,6 +122,7 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClCompile Include="src\GameSound.cpp" />
     <ClCompile Include="src\Kinect.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MoveButtons.cpp" />
     <ClCompile Include="src\Piece.cpp" />
     <ClCompile Include="src\Score.cpp" />
   </ItemGroup>
@@ -131,6 +132,7 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClInclude Include="src\GameCore.h" />
     <ClInclude Include="src\GameSound.h" />
     <ClInclude Include="src\Kinect.h" />
+    <ClInclude Include="src\MoveButtons.h" />
     <ClInclude Include="src\Piece.h" />
     <ClInclude Include="src\Score.h" />
   </ItemGroup>

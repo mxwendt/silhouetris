@@ -4,6 +4,7 @@
 #include "GameSound.h"
 #include "GameImages.h"
 #include "Piece.h"
+#include "MoveButtons.h"
 #include "Board.h"
 #include "Score.h"
 #include "Kinect.h"
@@ -38,6 +39,7 @@ private:
 	GameImages images;
 
 	Piece* piece;
+	MoveButtons* buttons;
 	Board* board;
 	Score* score;
 	Kinect* kinect;

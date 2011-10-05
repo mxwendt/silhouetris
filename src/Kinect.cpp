@@ -37,7 +37,35 @@ Kinect::Kinect(int aNearThreshold, int aFarThreshold) {
 
 	depthPixels = new unsigned char[XN_VGA_X_RES * XN_VGA_Y_RES];
 	depthMask = new ofImage();
-	depthImage = new ofImage();
+	depthButtonLeft = new ofImage();
+	depthButtonRight = new ofImage();
+	depthBlock00 = new ofImage();
+	depthBlock01 = new ofImage();
+	depthBlock02 = new ofImage();
+	depthBlock03 = new ofImage();
+	depthBlock10 = new ofImage();
+	depthBlock11 = new ofImage();
+	depthBlock12 = new ofImage();
+	depthBlock13 = new ofImage();
+	depthBlock20 = new ofImage();
+	depthBlock21 = new ofImage();
+	depthBlock22 = new ofImage();
+	depthBlock23 = new ofImage();
+
+	images.push_back(depthButtonLeft);
+	images.push_back(depthButtonRight);
+	images.push_back(depthBlock00);
+	images.push_back(depthBlock01);
+	images.push_back(depthBlock02);
+	images.push_back(depthBlock03);
+	images.push_back(depthBlock10);
+	images.push_back(depthBlock11);
+	images.push_back(depthBlock12);
+	images.push_back(depthBlock13);
+	images.push_back(depthBlock20);
+	images.push_back(depthBlock21);
+	images.push_back(depthBlock22);
+	images.push_back(depthBlock23);
 }
 
 Kinect::~Kinect() {
@@ -49,8 +77,47 @@ Kinect::~Kinect() {
 	delete depthMask;
 	depthMask = NULL;
 
-	delete depthImage;
-	depthImage = NULL;
+	delete depthButtonLeft;
+	depthButtonLeft = NULL;
+
+	delete depthButtonRight;
+	depthButtonRight = NULL;
+
+	delete depthBlock00;
+	depthBlock00 = NULL;
+
+	delete depthBlock01;
+	depthBlock01 = NULL;
+
+	delete depthBlock02;
+	depthBlock02 = NULL;
+
+	delete depthBlock03;
+	depthBlock03 = NULL;
+
+	delete depthBlock10;
+	depthBlock10 = NULL;
+
+	delete depthBlock11;
+	depthBlock11 = NULL;
+
+	delete depthBlock12;
+	depthBlock12 = NULL;
+
+	delete depthBlock13;
+	depthBlock13 = NULL;
+
+	delete depthBlock20;
+	depthBlock20 = NULL;
+
+	delete depthBlock21;
+	depthBlock21 = NULL;
+
+	delete depthBlock22;
+	depthBlock22 = NULL;
+
+	delete depthBlock23;
+	depthBlock23 = NULL;
 }
 
 ///////////////////////////////////////////////////////////////
@@ -71,16 +138,47 @@ void Kinect::updateDepthImage() {
 				depthPixels[i] = 255;
 			}
 		}
-		
 		depthMask->setFromPixels(depthPixels, XN_VGA_X_RES, XN_VGA_Y_RES, OF_IMAGE_GRAYSCALE);
-	
-		unsigned char image[XN_VGA_X_RES * XN_VGA_Y_RES];
-		depthImage->setFromPixels(depthMask->getPixels(70, 0, 500, 480, image), 500, 480, OF_IMAGE_GRAYSCALE);
 	}
 }
 
-void Kinect::drawDepthImage(int aX, int aY, int aW, int aH) {
-	depthImage->draw(aX, aY, aW, aH);
+void Kinect::separateImage() {
+	unsigned char tempImage1[70 * 480];
+	depthButtonLeft->setFromPixels(depthMask->getPixels(70, 0, 70, 480, tempImage1), 70, 480, OF_IMAGE_GRAYSCALE);
+	depthButtonRight->setFromPixels(depthMask->getPixels(500, 0, 70, 480, tempImage1), 70, 480, OF_IMAGE_GRAYSCALE);
+	unsigned char tempImage2[120 * 120];
+	depthBlock00->setFromPixels(depthMask->getPixels(140,   0, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock01->setFromPixels(depthMask->getPixels(140, 120, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock02->setFromPixels(depthMask->getPixels(140, 240, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock03->setFromPixels(depthMask->getPixels(140, 360, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock10->setFromPixels(depthMask->getPixels(260,   0, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock11->setFromPixels(depthMask->getPixels(260, 120, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock12->setFromPixels(depthMask->getPixels(260, 240, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock13->setFromPixels(depthMask->getPixels(260, 360, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock20->setFromPixels(depthMask->getPixels(380,   0, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock21->setFromPixels(depthMask->getPixels(380, 120, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock22->setFromPixels(depthMask->getPixels(380, 240, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+	depthBlock23->setFromPixels(depthMask->getPixels(380, 360, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
+}
+
+void Kinect::drawBlockImages() {
+	depthBlock00->draw(569, 24);
+	depthBlock01->draw(569, 144);
+	depthBlock02->draw(569, 264);
+	depthBlock03->draw(569, 384);
+	depthBlock10->draw(689, 24);
+	depthBlock11->draw(689, 144);
+	depthBlock12->draw(689, 264);
+	depthBlock13->draw(689, 384);
+	depthBlock20->draw(809, 24);
+	depthBlock21->draw(809, 144);
+	depthBlock22->draw(809, 264);
+	depthBlock23->draw(809, 384);
+}
+
+void Kinect::drawButtonImages() {
+	depthButtonLeft->draw(499, 24);
+	depthButtonRight->draw(929, 24);
 }
 
 void Kinect::changeThreshold(int aNear, int aFar) {
@@ -101,6 +199,6 @@ void Kinect::changeThreshold(int aNear, int aFar) {
 	}
 }
 
-ofImage* Kinect::getDepthImage() {
-	return depthImage;
+vector<ofImage*> Kinect::getImages() {
+	return images;
 }

@@ -9,33 +9,26 @@ Piece::Piece() {
 		}
 	}
 
-	moveLeft = false;
-	moveRight = false;
-
 	sensitivity = 10;
 }
 
 Piece::~Piece() {}
 
 ///////////////////////////////////////////////////////////////
-void Piece::update(ofImage* aDepthImage) {
-	unsigned char tempActiveBlock[120 * 120];
-	setActiveBlock(aDepthImage->getPixels( 70,   0, 120, 120, tempActiveBlock), 0, 0);
-	setActiveBlock(aDepthImage->getPixels(190,   0, 120, 120, tempActiveBlock), 0, 1);
-	setActiveBlock(aDepthImage->getPixels(310,   0, 120, 120, tempActiveBlock), 0, 2);
-	setActiveBlock(aDepthImage->getPixels( 70, 120, 120, 120, tempActiveBlock), 1, 0);
-	setActiveBlock(aDepthImage->getPixels(190, 120, 120, 120, tempActiveBlock), 1, 1);
-	setActiveBlock(aDepthImage->getPixels(310, 120, 120, 120, tempActiveBlock), 1, 2);
-	setActiveBlock(aDepthImage->getPixels( 70, 240, 120, 120, tempActiveBlock), 2, 0);
-	setActiveBlock(aDepthImage->getPixels(190, 240, 120, 120, tempActiveBlock), 2, 1);
-	setActiveBlock(aDepthImage->getPixels(310, 240, 120, 120, tempActiveBlock), 2, 2);
-	setActiveBlock(aDepthImage->getPixels( 70, 360, 120, 120, tempActiveBlock), 3, 0);
-	setActiveBlock(aDepthImage->getPixels(190, 360, 120, 120, tempActiveBlock), 3, 1);
-	setActiveBlock(aDepthImage->getPixels(310, 360, 120, 120, tempActiveBlock), 3, 2);
-
-	unsigned char tempMoveBlock[70 * 480];
-	setMoveBlock(aDepthImage->getPixels(0, 0, 70, 480, tempMoveBlock), LEFT);
-	setMoveBlock(aDepthImage->getPixels(430, 0, 70, 480, tempMoveBlock), RIGHT);
+void Piece::update(vector<ofImage*> aImages) {
+	unsigned char tempImage[120 * 120];
+	setActiveBlock(aImages.at(2)->getPixels(0, 0, 120, 120, tempImage), 0, 0);
+	setActiveBlock(aImages.at(3)->getPixels(0, 0, 120, 120, tempImage), 0, 1);
+	setActiveBlock(aImages.at(4)->getPixels(0, 0, 120, 120, tempImage), 0, 2);
+	setActiveBlock(aImages.at(5)->getPixels(0, 0, 120, 120, tempImage), 0, 3);
+	setActiveBlock(aImages.at(6)->getPixels(0, 0, 120, 120, tempImage), 1, 0);
+	setActiveBlock(aImages.at(7)->getPixels(0, 0, 120, 120, tempImage), 1, 1);
+	setActiveBlock(aImages.at(8)->getPixels(0, 0, 120, 120, tempImage), 1, 2);
+	setActiveBlock(aImages.at(9)->getPixels(0, 0, 120, 120, tempImage), 1, 3);
+	setActiveBlock(aImages.at(10)->getPixels(0, 0, 120, 120, tempImage), 2, 0);
+	setActiveBlock(aImages.at(11)->getPixels(0, 0, 120, 120, tempImage), 2, 1);
+	setActiveBlock(aImages.at(12)->getPixels(0, 0, 120, 120, tempImage), 2, 2);
+	setActiveBlock(aImages.at(13)->getPixels(0, 0, 120, 120, tempImage), 2, 3);
 }
 
 void Piece::drawOverlay(int aX, int aY, int aWidth, int aHeight) {
@@ -47,18 +40,6 @@ void Piece::drawOverlay(int aX, int aY, int aWidth, int aHeight) {
 				ofRect((aWidth / PIECE_COLUMNS) * i + aX, (aHeight / PIECE_ROWS) * j + aY, aWidth / PIECE_COLUMNS, aHeight / PIECE_ROWS);
 			}
 		}
-	}
-	ofDisableAlphaBlending();
-}
-
-void Piece::drawMoveButtons(int aX, int aY) {
-	ofEnableAlphaBlending();
-	ofSetColor(255, 0, 0, 80);
-	if(moveLeft) {
-		ofRect(aX - 70, aY, 70, 480);
-	} 
-	else if(moveRight) {
-		ofRect(aX + 360, aY, 70, 480);
 	}
 	ofDisableAlphaBlending();
 }
@@ -76,14 +57,6 @@ void Piece::drawPiece(int aX, int aY, int aWidth, int aHeight) {
 
 bool Piece::isActiveBlock(int aCol, int aRow) {
 	return blocks[aCol][aRow];
-}
-
-bool Piece::isMoveLeft() {
-	return moveLeft;
-}
-
-bool Piece::isMoveRight() {
-	return moveRight;
 }
 
 bool Piece::isEmpty() {
@@ -131,7 +104,7 @@ void Piece::changeSensitivity(int aValue) {
 		sensitivity = 0;
 	}
 	if(sensitivity > PIECE_WIDTH * PIECE_HEIGHT) {
-		sensitivity = PIECE_WIDTH * PIECE_HEIGHT
+		sensitivity = PIECE_WIDTH * PIECE_HEIGHT;
 	}
 }
 
@@ -144,36 +117,10 @@ void Piece::setActiveBlock(unsigned char* aPixels, int aCol, int aRow) {
 		}
 	}
 	if(counter > sensitivity) {
-		blocks[aRow][aCol] = true; 
+		blocks[aCol][aRow] = true; 
 		return;
 	} 
 	else {
-		blocks[aRow][aCol] = false;
-	}
-}
-
-void Piece::setMoveBlock(unsigned char* aPixels, int aDir) {
-	int counter = 0;
-	for(int i = 0; i < 70 * 480; i++) {	
-		if (aPixels[i] != 255) {
-			counter++;
-		}
-	}
-	if(counter > sensitivity) {
-		if(aDir == LEFT) {
-			moveLeft = true;
-		}
-		if(aDir == RIGHT) {
-			moveRight = true;
-		}
-		return;
-	} 
-	else {	
-		if(aDir == LEFT) {
-			moveLeft = false;
-		}
-		if(aDir == RIGHT) {
-			moveRight = false;
-		}
+		blocks[aCol][aRow] = false;
 	}
 }

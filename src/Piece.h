@@ -15,17 +15,15 @@ public:
 	static const int PIECE_WIDTH = 120; // in blocks
 	static const int PIECE_HEIGHT = 160; // in blocks
 
-	void update(ofImage* aDepthImage);
+	void update(vector<ofImage*> aImages);
+
 	void drawOverlay(int aX, int aY, int aWidth, int aHeight);
-	void drawMoveButtons(int aX, int aY);
 	void drawPiece(int aX, int aY, int aWidth, int aHeight);
 
 	bool isEmpty();
 	bool isCross();
 
 	bool isActiveBlock(int aCol, int aRow);
-	bool isMoveLeft();
-	bool isMoveRight();
 
 	void changeSensitivity(int aValue);
 
@@ -33,18 +31,10 @@ public:
 
 private:
 	///////////////////////////////////////////////////////////////
-	static const int LEFT = 1;
-	static const int RIGHT = 2;
-
 	void setActiveBlock(unsigned char* aPixels, int aCol, int aRow);
-	void setMoveBlock(unsigned char* aPixels, int aDir);
+	/*void setMoveBlock(unsigned char* aPixels, int aDir);*/
 
 	bool blocks[3][4];
-
-	bool moveLeft;
-	bool moveRight;
-	bool lastMoveLeft;
-	bool lastMoveRight;
 
 	int sensitivity; // pixel count that makes a block active
 };

@@ -7,6 +7,7 @@ void GameCore::setup() {
 	sound.loadSoundFiles();
 
 	piece = new Piece();
+	buttons = new MoveButtons();
 	board = new Board();
 	score = new Score();
 	kinect = new Kinect(1500, 3000);
@@ -23,6 +24,9 @@ void GameCore::exit() {
 	delete piece;
 	piece = NULL;
 	
+	delete buttons;
+	buttons = NULL;
+
 	delete board;
 	board = NULL;
 
@@ -37,29 +41,34 @@ void GameCore::update() {
 	switch(state) {
 	case IDLE_STATE:
 		kinect->updateDepthImage();
-		piece->update(kinect->getDepthImage());
+		kinect->separateImage();
+		piece->update(kinect->getImages());
+		buttons->update(kinect->getImages());
 		if(!piece->isEmpty()) {
 			changeState(RECO_STATE);
 		}
 		break;
 	case RECO_STATE:
 		kinect->updateDepthImage();
-		piece->update(kinect->getDepthImage());
+		kinect->separateImage();
+		piece->update(kinect->getImages());
 		if(piece->isCross()) {
 			changeState(MOVE_STATE);
 		}
 		break;
 	case MOVE_STATE:
 		kinect->updateDepthImage();
-		piece->update(kinect->getDepthImage());
+		kinect->separateImage();
+		//piece->update(kinect->getImages());
+		buttons->update(kinect->getImages());
 		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > 500) {
 			if(!piece->isEmpty()) {
 				// check if move right is possible
-				if(piece->isMoveRight()) {
+				if(buttons->isMoveRight()) {
 					board->isPossibleMove(piece, 1, 0);
 				}
 				// check if move left is possible
-				if(piece->isMoveLeft()) {
+				if(buttons->isMoveLeft()) {
 					board->isPossibleMove(piece, -1, 0);
 				}
 				elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
@@ -73,7 +82,8 @@ void GameCore::update() {
 		break;
 	case PLAY_STATE:
 		kinect->updateDepthImage();
-		piece->update(kinect->getDepthImage());
+		kinect->separateImage();
+		piece->update(kinect->getImages());
 		if(ofGetElapsedTimeMillis() - elapsedTimeForDisplayUpdate > blockSpeed) {
 			if(!piece->isEmpty()) {
 				// check if move down is possible
@@ -98,7 +108,8 @@ void GameCore::update() {
 		break;
 	case OVER_STATE:
 		kinect->updateDepthImage();
-		piece->update(kinect->getDepthImage());
+		kinect->separateImage();
+		piece->update(kinect->getImages());
 		if(piece->isCross()) {
 			changeState(MOVE_STATE);
 		}
@@ -115,28 +126,32 @@ void GameCore::draw() {
 		break;
 	case RECO_STATE:
 		images.drawRecoState();
-		kinect->drawDepthImage(499, 24, 500, 480);
+		kinect->drawBlockImages();
 		piece->drawOverlay(569, 24, 360, 480);
+		images.drawOutline(false);
 		board->draw(piece);
 		score->draw(499, 695);
 		break;
 	case MOVE_STATE:
 		images.drawPlayState();
-		kinect->drawDepthImage(499, 24, 500, 480);
-		piece->drawMoveButtons(569, 24);
+		kinect->drawBlockImages();
+		kinect->drawButtonImages();
+		buttons->drawMoveButtons(569, 24);
+		images.drawOutline(true);
 		board->draw(piece);
 		score->draw(499, 695);
 		break;
 	case PLAY_STATE:
 		images.drawPlayState();
-		kinect->drawDepthImage(499, 24, 500, 480);
+		kinect->drawBlockImages();
 		piece->drawOverlay(569, 24, 360, 480);
+		images.drawOutline(false);
 		board->draw(piece);
 		score->draw(499, 695);
 		break;
 	case OVER_STATE:
 		images.drawOverState();
-		kinect->drawDepthImage(499, 24, 500, 480);
+		kinect->drawBlockImages();
 		piece->drawOverlay(569, 24, 360, 480);
 		board->draw(piece);
 		score->draw(499, 695);
@@ -216,13 +231,15 @@ void GameCore::keyPressed(int aKey) {
 	case 'r':
 		speedIncreaseLevel += 10;
 		break;
-	// decrease pixels it takes to activate a block for the piece
+	// decrease pixels it takes to activate a block or button
 	case 'k':
 		piece->changeSensitivity(-10);
+		buttons->changeSensitivity(-10);
 		break;
-	// increase pixels it takes to activate a block for the piece
+	// increase pixels it takes to activate a block or button
 	case 'l':
 		piece->changeSensitivity(10);
+		buttons->changeSensitivity(10);
 		break;
 	default:
 		break;

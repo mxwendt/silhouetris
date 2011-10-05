@@ -25,6 +25,9 @@
     <ClCompile Include="src\Board.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
+    <ClCompile Include="src\MoveButtons.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameSound.h">
@@ -46,6 +49,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MoveButtons.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,8 +12,11 @@ public:
 	///////////////////////////////////////////////////////////////
 	void drawIdleState();
 	void drawRecoState();
+	void drawMoveState();
 	void drawPlayState();
 	void drawOverState();
+
+	void drawOutline(bool aSeperator);
 
 private:
 	///////////////////////////////////////////////////////////////
@@ -22,6 +25,18 @@ private:
 	ofImage wallLeft;
 	ofImage wallRight;
 	ofImage score;
+
+	ofImage outMoveLeft;
+	ofImage outMoveRight;
+	ofImage outMoveTop;
+	ofImage outMoveBottom;
+	ofImage outMoveSepLeft;
+	ofImage outMoveSepRight;
+
+	ofImage outPlayLeft;
+	ofImage outPlayRight;
+	ofImage outPlayTop;
+	ofImage outPlayBottom;
 };
 
 #endif
