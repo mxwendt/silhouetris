@@ -43,7 +43,6 @@ void GameCore::update() {
 		kinect->updateDepthImage();
 		kinect->separateImage();
 		piece->update(kinect->getImages());
-		buttons->update(kinect->getImages());
 		if(!piece->isEmpty()) {
 			changeState(RECO_STATE);
 			break;
@@ -115,8 +114,6 @@ void GameCore::update() {
 		kinect->separateImage();
 		piece->update(kinect->getImages());
 		if(piece->isCross()) {
-			board->reset();
-			score->reset();
 			changeState(MOVE_STATE);
 			break;
 		}
@@ -181,7 +178,9 @@ void GameCore::keyPressed(int aKey) {
 	case '2': 
 		changeState(RECO_STATE);
 		break;
-	case '3': 
+	case '3':
+		board->reset();
+		score->reset();
 		changeState(MOVE_STATE);
 		break;
 	case '4':  
@@ -270,7 +269,7 @@ void GameCore::changeState(int aState) {
 		break;
 	case RECO_STATE:
 		cout << "RECO_STATE" << endl;
-		sound.playRecoMusic();;
+		sound.playRecoMusic();
 		state = RECO_STATE;
 		break;
 	case MOVE_STATE:
@@ -290,6 +289,8 @@ void GameCore::changeState(int aState) {
 	case OVER_STATE:
 		cout << "OVER_STATE" << endl;
 		sound.playIdleMusic();
+		board->reset();
+		score->reset();
 		state = OVER_STATE;
 		break;
 	default:
