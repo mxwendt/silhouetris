@@ -74,29 +74,17 @@ bool Piece::isEmpty() {
 	}
 }
 
-bool Piece::isCross() {
+bool Piece::isInitialForm() {
 	// check for upside L to start a game
 	if(blocks[0][0] && blocks[1][0] && blocks[2][0] &&
 	   blocks[2][1] && blocks[2][2] && blocks[2][3] &&
 	   !blocks[0][1] && !blocks[1][1] && !blocks[0][2] &&
 	   !blocks[1][1] && !blocks[1][2] && !blocks[1][3]) {
-		   return true;
+		return true;
 	}
 	else {
 		return false;
 	}
-	//// check for cross to start a game
-	//if(blocks[1][0] && blocks[0][1] &&
-	//   blocks[1][1] && blocks[2][1] && 
-	//   blocks[1][2] && blocks[1][3] &&
-	//   !blocks[0][0] && !blocks[2][0] &&
-	//   !blocks[0][2] && !blocks[2][2] &&
-	//   !blocks[0][3] && !blocks[2][3]) {
-	//	return true;
-	//}
-	//else {
-	//	return false;
-	//}
 }
 
 void Piece::reset() {

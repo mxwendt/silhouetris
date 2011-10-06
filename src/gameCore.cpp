@@ -4,8 +4,6 @@
 void GameCore::setup() {
 	ofBackground(39, 40, 32);
 
-	sound.loadSoundFiles();
-
 	piece = new Piece();
 	buttons = new MoveButtons();
 	board = new Board();
@@ -52,7 +50,7 @@ void GameCore::update() {
 		kinect->updateDepthImage();
 		kinect->separateImage();
 		piece->update(kinect->getImages());
-		if(piece->isCross()) {
+		if(piece->isInitialForm()) {
 			changeState(MOVE_STATE);
 			break;
 		}
@@ -94,9 +92,7 @@ void GameCore::update() {
 				// check if move down is possible
 				if(!board->isPossibleMove(piece, 0, 1)) {
 					board->storePiece(piece, score->calcScore(piece));
-					sound.playSoundHitBottom();
 					score->update(board->deleteLines());
-					sound.playSoundClearLine();
 					board->insertNewPiece();
 					if(board->isGameOver()) {
 						changeState(OVER_STATE);
@@ -113,7 +109,7 @@ void GameCore::update() {
 		kinect->updateDepthImage();
 		kinect->separateImage();
 		piece->update(kinect->getImages());
-		if(piece->isCross()) {
+		if(piece->isInitialForm()) {
 			changeState(MOVE_STATE);
 			break;
 		}
@@ -189,27 +185,6 @@ void GameCore::keyPressed(int aKey) {
 	case '5':  
 		changeState(OVER_STATE);
 		break;
-	case 'a':
-		sound.increaseIdleMusicVol(0.1f);
-		break;
-	case 's':
-		sound.decreaseIdleMusicVol(0.1f);
-		break;
-	case 'd':
-		sound.increaseRecoMusicVol(0.1f);
-		break;
-	case 'f':
-		sound.decreaseRecoMusicVol(0.1f);
-		break;
-	case 'g':
-		sound.increasePlayMusicVol(0.1f);
-		break;
-	case 'h':
-		sound.decreasePlayMusicVol(0.1f);
-		break;
-	case 'j':
-		sound.stopPlayingMusic();
-		break;
 	// increase threshold to the front
 	case 'n':
 		kinect->changeThreshold(50, 0);	
@@ -259,22 +234,17 @@ void GameCore::keyPressed(int aKey) {
 
 ///////////////////////////////////////////////////////////////
 void GameCore::changeState(int aState) {
-	sound.stopPlayingMusic();
-
 	switch(aState) {
 	case IDLE_STATE:
 		cout << "IDLE_STATE" << endl;
-		sound.playIdleMusic();
 		state = IDLE_STATE;
 		break;
 	case RECO_STATE:
-		cout << "RECO_STATE" << endl;
-		sound.playRecoMusic();
+		cout << "RECO_STATE" << endl;;
 		state = RECO_STATE;
 		break;
 	case MOVE_STATE:
 		cout << "MOVE_STATE" << endl;	
-		//sound.playPlayMusic();
 		moveCounter = 0;
 		counter = 4;
 		elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
@@ -282,13 +252,11 @@ void GameCore::changeState(int aState) {
 		break;
 	case PLAY_STATE:
 		cout << "PLAY_STATE" << endl;
-		//sound.playPlayMusic();
 		elapsedTimeForDisplayUpdate = ofGetElapsedTimeMillis();
 		state = PLAY_STATE;
 		break;
 	case OVER_STATE:
 		cout << "OVER_STATE" << endl;
-		sound.playIdleMusic();
 		board->reset();
 		score->reset();
 		state = OVER_STATE;

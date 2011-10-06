@@ -7,9 +7,6 @@
     <ClCompile Include="src\GameCore.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameSound.cpp">
-      <Filter>Source Code</Filter>
-    </ClCompile>
     <ClCompile Include="src\Kinect.cpp">
       <Filter>Source Code</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GameSound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Kinect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -56,53 +50,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\data\b1.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\b2.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\b3.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\b4.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\b5.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\b6.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\pixelart.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\music-idle.mp3">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\music-play.mp3">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\music-reco.mp3">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\bg.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\logo.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\sound-gameover.wav">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\sound-hit.wav">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bin\data\sound-line.wav">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Source Code">
       <UniqueIdentifier>{ff85db5f-cabb-4a05-bdba-984f39b2f8bf}</UniqueIdentifier>
     </Filter>
@@ -112,5 +59,82 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{33b4281d-d23f-4fb3-a913-982d6f65a09d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{95626dbc-4757-44dc-9ec5-afeed5f58992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Font">
+      <UniqueIdentifier>{9a2c1540-fe25-403b-b2de-7e39422a5a85}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\b1.jpg">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\wallRight.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\b2.jpg">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\b3.jpg">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\b4.jpg">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\b5.jpg">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\b6.jpg">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\bg.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\copyright.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\logo.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlineMoveBottom.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlineMoveLeft.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlineMoveRight.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlineMoveSepLeft.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlineMoveSepRight.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlineMoveTop.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlinePlayBottom.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlinePlayLeft.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlinePlayRight.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\outlinePlayTop.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\score.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\wallLeft.png">
+      <Filter>Resource Files\Images</Filter>
+    </None>
+    <None Include="bin\data\8bitoperator_jve.ttf">
+      <Filter>Resource Files\Font</Filter>
+    </None>
   </ItemGroup>
 </Project>

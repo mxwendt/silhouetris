@@ -1,7 +1,6 @@
 #ifndef _GAME_CORE
 #define _GAME_CORE
 
-#include "GameSound.h"
 #include "GameImages.h"
 #include "Piece.h"
 #include "MoveButtons.h"
@@ -35,7 +34,6 @@ private:
 	void checkElapsedTime();
 
 	GameState state;
-	GameSound sound;
 	GameImages images;
 
 	Piece* piece;

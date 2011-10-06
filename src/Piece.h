@@ -21,7 +21,7 @@ public:
 	void drawPiece(int aX, int aY, int aWidth, int aHeight);
 
 	bool isEmpty();
-	bool isCross();
+	bool isInitialForm();
 
 	bool isActiveBlock(int aCol, int aRow);
 

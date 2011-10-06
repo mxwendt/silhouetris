@@ -119,7 +119,6 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\GameImages.cpp" />
     <ClCompile Include="src\GameCore.cpp" />
-    <ClCompile Include="src\GameSound.cpp" />
     <ClCompile Include="src\Kinect.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MoveButtons.cpp" />
@@ -130,7 +129,6 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\GameImages.h" />
     <ClInclude Include="src\GameCore.h" />
-    <ClInclude Include="src\GameSound.h" />
     <ClInclude Include="src\Kinect.h" />
     <ClInclude Include="src\MoveButtons.h" />
     <ClInclude Include="src\Piece.h" />
@@ -143,6 +141,7 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\data\8bitoperator_jve.ttf" />
     <None Include="bin\data\b1.jpg" />
     <None Include="bin\data\b2.jpg" />
     <None Include="bin\data\b3.jpg" />
@@ -150,14 +149,21 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <None Include="bin\data\b5.jpg" />
     <None Include="bin\data\b6.jpg" />
     <None Include="bin\data\bg.png" />
-    <None Include="bin\data\sound-gameover.wav" />
-    <None Include="bin\data\sound-hit.wav" />
-    <None Include="bin\data\sound-line.wav" />
+    <None Include="bin\data\copyright.png" />
     <None Include="bin\data\logo.png" />
-    <None Include="bin\data\music-idle.mp3" />
-    <None Include="bin\data\music-play.mp3" />
-    <None Include="bin\data\music-reco.mp3" />
-    <None Include="bin\data\pixelart.ttf" />
+    <None Include="bin\data\outlineMoveBottom.png" />
+    <None Include="bin\data\outlineMoveLeft.png" />
+    <None Include="bin\data\outlineMoveRight.png" />
+    <None Include="bin\data\outlineMoveSepLeft.png" />
+    <None Include="bin\data\outlineMoveSepRight.png" />
+    <None Include="bin\data\outlineMoveTop.png" />
+    <None Include="bin\data\outlinePlayBottom.png" />
+    <None Include="bin\data\outlinePlayLeft.png" />
+    <None Include="bin\data\outlinePlayRight.png" />
+    <None Include="bin\data\outlinePlayTop.png" />
+    <None Include="bin\data\score.png" />
+    <None Include="bin\data\wallLeft.png" />
+    <None Include="bin\data\wallRight.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
