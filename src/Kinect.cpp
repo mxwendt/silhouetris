@@ -2,9 +2,6 @@
 
 ///////////////////////////////////////////////////////////////
 Kinect::Kinect(int aNearThreshold, int aFarThreshold) {
-	nearThreshold = aNearThreshold;
-	farThreshold = aFarThreshold;
-
 	retVal = XN_STATUS_OK;
 
 	// init openni context
@@ -35,10 +32,21 @@ Kinect::Kinect(int aNearThreshold, int aFarThreshold) {
 		std::cout << "kinect initialized" << std::endl;
 	}
 
+	// set trackable range
+	nearThreshold = aNearThreshold;
+	farThreshold = aFarThreshold;
+
+	// create images to work w/ depth stream data
 	depthPixels = new unsigned char[XN_VGA_X_RES * XN_VGA_Y_RES];
 	depthMask = new ofImage();
+
+	// create image for move left button
 	depthButtonLeft = new ofImage();
+
+	// create image for move right button
 	depthButtonRight = new ofImage();
+
+	//create images for the 12 different blocks
 	depthBlock00 = new ofImage();
 	depthBlock01 = new ofImage();
 	depthBlock02 = new ofImage();
@@ -52,6 +60,7 @@ Kinect::Kinect(int aNearThreshold, int aFarThreshold) {
 	depthBlock22 = new ofImage();
 	depthBlock23 = new ofImage();
 
+	// save images
 	images.push_back(depthButtonLeft);
 	images.push_back(depthButtonRight);
 	images.push_back(depthBlock00);
@@ -71,6 +80,7 @@ Kinect::Kinect(int aNearThreshold, int aFarThreshold) {
 Kinect::~Kinect() {
 	context.Release();
 
+	// clean up
 	delete depthPixels;
 	depthPixels = NULL;
 
@@ -123,6 +133,7 @@ Kinect::~Kinect() {
 ///////////////////////////////////////////////////////////////
 void Kinect::updateDepthImage() {
 	retVal = context.WaitOneUpdateAll(depthGen);
+
 	if(retVal !=  XN_STATUS_OK) {
 		std::cout << "ERROR: failed to update data" << std::endl;
 		// TODO: handle failure
@@ -143,9 +154,12 @@ void Kinect::updateDepthImage() {
 }
 
 void Kinect::separateImage() {
+	// seperate the move buttons
 	unsigned char tempImage1[70 * 480];
 	depthButtonLeft->setFromPixels(depthMask->getPixels(70, 0, 70, 480, tempImage1), 70, 480, OF_IMAGE_GRAYSCALE);
 	depthButtonRight->setFromPixels(depthMask->getPixels(500, 0, 70, 480, tempImage1), 70, 480, OF_IMAGE_GRAYSCALE);
+	
+	// seperate the 12 different blocks
 	unsigned char tempImage2[120 * 120];
 	depthBlock00->setFromPixels(depthMask->getPixels(140,   0, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);
 	depthBlock01->setFromPixels(depthMask->getPixels(140, 120, 120, 120, tempImage2), 120, 120, OF_IMAGE_GRAYSCALE);

@@ -15,6 +15,7 @@ public:
 	void draw(int aX, int aY);
 
 	void drawCounter(int aX, int aY, int aValue);
+	void drawScoreTable(int aX, int aY);
 
 	int calcScore(Piece* aPiece);
 	void reset();
@@ -27,6 +28,8 @@ private:
 	float complexCalcR3;
 	int complexCalc;
 	int highscore;
+
+	vector<int> scoreTable;
 
 	ofTrueTypeFont font; // should still be changed to "gunship bitmap"
 };

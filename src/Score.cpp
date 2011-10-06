@@ -2,7 +2,14 @@
 
 ///////////////////////////////////////////////////////////////
 Score::Score() {
-	font.loadFont("8bitoperator_jve.ttf", 44);
+	font.loadFont("8bitoperator_jve.ttf", 44);	
+
+	// initialize score table with zeros
+	int i = 0;
+	while(i < 10) {
+		scoreTable.push_back(0);
+		i++;
+	}
 
 	highscore = 0;
 }
@@ -27,6 +34,15 @@ void Score::drawCounter(int aX, int aY, int aValue) {
 	stringstream ss;
 	ss << aValue;
 	font.drawString(ss.str(), aX, aY);
+}
+
+void Score::drawScoreTable(int aX, int aY) {
+	ofSetColor(39, 40, 32);
+	for(int i = 0; i < scoreTable.size(); i++) {
+		stringstream ss;
+		ss << scoreTable.at(i);
+		font.drawString(ss.str(), aX, aY + i * 40);
+	}
 }
 
 int Score::calcScore(Piece* aPiece) {
@@ -94,5 +110,9 @@ int Score::calcScore(Piece* aPiece) {
 }
 
 void Score::reset() {
+	scoreTable.push_back(highscore);
+	sort(scoreTable.rbegin(), scoreTable.rend());
+	scoreTable.pop_back();
+	
 	highscore = 0;
 }
