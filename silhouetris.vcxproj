@@ -130,6 +130,7 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     <ClInclude Include="src\GameImages.h" />
     <ClInclude Include="src\GameCore.h" />
     <ClInclude Include="src\Kinect.h" />
+    <ClInclude Include="src\MilliTimer.h" />
     <ClInclude Include="src\MoveButtons.h" />
     <ClInclude Include="src\Piece.h" />
     <ClInclude Include="src\Score.h" />

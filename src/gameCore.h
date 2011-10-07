@@ -6,6 +6,7 @@
 #include "MoveButtons.h"
 #include "Board.h"
 #include "Score.h"
+#include "MilliTimer.h"
 #include "Kinect.h"
 #include "ofMain.h"
 
@@ -40,6 +41,9 @@ private:
 	MoveButtons* buttons;
 	Board* board;
 	Score* score;
+	MilliTimer* updateTimer;
+	MilliTimer* countTimer;
+	MilliTimer* levelTimer;
 	Kinect* kinect;
 
 	int moveCounter;
@@ -49,7 +53,7 @@ private:
 	int elapsedTimeForGameSpeed; // in s
 	int timeToLevelUp; // time in s which it thakes to the next level
 	int speedIncreaseLevel; // time in ms how big the increase of "blockSpeed" per level is
-	int blockSpeed; // ms that it takes to move a piece one step down
+	int speed; // millisec it takes to move one row down
 };
 
 #endif
