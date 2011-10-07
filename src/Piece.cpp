@@ -74,13 +74,66 @@ bool Piece::isEmpty() {
 	}
 }
 
-bool Piece::isInitialForm() {
-	// check for upside L to start a game
-	if(blocks[0][0] && blocks[1][0] && blocks[2][0] &&
-	   blocks[2][1] && blocks[2][2] && blocks[2][3] &&
-	   !blocks[0][1] && !blocks[1][1] && !blocks[0][2] &&
-	   !blocks[1][1] && !blocks[1][2] && !blocks[1][3]) {
-		return true;
+bool Piece::isInitialBlocks(int aType) {
+	if(aType == 1) {
+		// OOX
+		// XXX
+		// OXX
+		// OXX
+		if(!blocks[0][0] && !blocks[1][0] &&  blocks[2][0] &&
+		    blocks[0][1] &&  blocks[1][1] &&  blocks[2][1] &&
+		   !blocks[0][2] &&  blocks[1][2] &&  blocks[2][2] &&
+		   !blocks[0][3] &&  blocks[1][3] &&  blocks[2][3]) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else if(aType == 2) {
+		// OXO
+		// XXX
+		// OXO
+		// OXO
+		if(!blocks[0][0] &&  blocks[1][0] && !blocks[2][0] &&
+		    blocks[0][1] &&  blocks[1][1] &&  blocks[2][1] &&
+		   !blocks[0][2] &&  blocks[1][2] && !blocks[2][2] &&
+		   !blocks[0][3] &&  blocks[1][3] && !blocks[2][3]) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else if(aType == 3) {
+		// XXX
+		// OOX
+		// OOX
+		// OOX
+		if(blocks[0][0] &&  blocks[1][0] &&  blocks[2][0] &&
+		  !blocks[0][1] && !blocks[1][1] &&  blocks[2][1] &&
+		  !blocks[0][2] && !blocks[1][2] &&  blocks[2][2] &&
+		  !blocks[0][3] && !blocks[1][3] &&  blocks[2][3]) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else if(aType == 4) {
+		// OOO
+		// OOO
+		// XXO
+		// XXO
+		if(!blocks[0][0] && !blocks[1][0] && !blocks[2][0] &&
+		   !blocks[0][1] && !blocks[1][1] && !blocks[2][1] &&
+		    blocks[0][2] &&  blocks[1][2] && !blocks[2][2] &&
+		    blocks[0][3] &&  blocks[1][3] && !blocks[2][3]) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
 		return false;

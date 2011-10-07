@@ -49,10 +49,11 @@ private:
 	int moveCounter;
 	int counter;
 
-	int elapsedTimeForDisplayUpdate; // in ms
-	int elapsedTimeForGameSpeed; // in s
-	int timeToLevelUp; // time in s which it thakes to the next level
-	int speedIncreaseLevel; // time in ms how big the increase of "blockSpeed" per level is
+	int initialSpeed;
+	int initialSpeedIncrease;
+	int initialLevelPeriod;
+	int initialCounterPeriod;
+
 	int speed; // millisec it takes to move one row down
 };
 

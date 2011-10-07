@@ -21,7 +21,8 @@ public:
 	void drawPiece(int aX, int aY, int aWidth, int aHeight);
 
 	bool isEmpty();
-	bool isInitialForm();
+
+	bool isInitialBlocks(int aType);
 
 	bool isActiveBlock(int aCol, int aRow);
 
@@ -32,7 +33,6 @@ public:
 private:
 	///////////////////////////////////////////////////////////////
 	void setActiveBlock(unsigned char* aPixels, int aCol, int aRow);
-	/*void setMoveBlock(unsigned char* aPixels, int aDir);*/
 
 	bool blocks[3][4];
 

@@ -18,6 +18,7 @@ public:
 	void drawScoreTable(int aX, int aY);
 
 	int calcScore(Piece* aPiece);
+	void updateScore();
 	void reset();
 
 private:

@@ -4,9 +4,12 @@
 GameImages::GameImages() {
 	logo.loadImage("logo.png");
 	copyright.loadImage("copyright.png");
-	wallLeft.loadImage("wallLeft.png");
-	wallRight.loadImage("wallRight.png");
-	score.loadImage("score.png");
+	wallLeft.loadImage("wall-left.png");
+	wallRight.loadImage("wall-right.png");
+	score.loadImage("score-dutch.png");
+	gameOverZone.loadImage("game-over-zone-line.png");
+	counter.loadImage("counter.png");
+	highscore.loadImage("highscore.png");
 
 	outMoveLeft.loadImage("outlineMoveLeft.png");
 	outMoveRight.loadImage("outlineMoveRight.png");
@@ -15,14 +18,22 @@ GameImages::GameImages() {
 	outMoveSepLeft.loadImage("outlineMoveSepLeft.png");
 	outMoveSepRight.loadImage("outlineMoveSepRight.png");
 
+	arrowLeft.loadImage("arrow-left.png");
+	arrowRight.loadImage("arrow-right.png");
+
 	outPlayLeft.loadImage("outlinePlayLeft.png");
 	outPlayRight.loadImage("outlinePlayRight.png");
 	outPlayTop.loadImage("outlinePlayTop.png");
 	outPlayBottom.loadImage("outlinePlayBottom.png");
+
+	instrBuildRows.loadImage("instruction-build-rows-dutch.png");
+	instrActivateBlocks.loadImage("instruction-activate-blocks-dutch.png");
+	instrInitialBlocks.loadImage("instruction-initial-blocks-dutch.png");
+	instrMoveLeft.loadImage("instruction-move-left-dutch.png");
+	instrMoveRight.loadImage("instruction-move-right-dutch.png");
 }
 
-GameImages::~GameImages() {
-}
+GameImages::~GameImages() {}
 
 ///////////////////////////////////////////////////////////////
 void GameImages::drawIdleState() {
@@ -78,5 +89,59 @@ void GameImages::drawOutline(bool aSeperator) {
 		outMoveBottom.draw(499, 504);
 		outMoveSepLeft.draw(558, 24);
 		outMoveSepRight.draw(929, 24);
+		ofEnableAlphaBlending();
+		arrowLeft.draw(520, 222);
+		arrowRight.draw(946, 222);
+		ofDisableAlphaBlending();
 	}
+}
+
+void GameImages::drawGameOverZone() {
+	ofEnableAlphaBlending();
+	/*ofSetColor(186, 205, 54, 80);
+	ofRect(37, 0, 400, 160);*/
+	ofSetColor(255, 255, 255);
+	gameOverZone.draw(37, 138);
+	ofDisableAlphaBlending();
+}
+
+void GameImages::drawHighscore() {
+	ofEnableAlphaBlending();
+	ofSetColor(255, 255, 255);
+	highscore.draw(52, 231);
+	ofDisableAlphaBlending();
+}
+
+void GameImages::drawRecoInstructions() {
+	ofSetColor(255, 255, 255);
+	instrInitialBlocks.draw(52, 174);
+	ofEnableAlphaBlending();
+	instrBuildRows.draw(52, 660);
+	instrActivateBlocks.draw(634, 33);
+	ofDisableAlphaBlending();
+}
+
+void GameImages::drawMoveInstructions() {
+	ofEnableAlphaBlending();
+	ofSetColor(255, 255, 255);
+	instrMoveLeft.draw(501, 33);
+	instrMoveRight.draw(802, 33);
+	counter.draw(210, 130);
+	ofDisableAlphaBlending();
+}
+
+void GameImages::drawPlayInstructions() {
+	ofEnableAlphaBlending();
+	ofSetColor(255, 255, 255);
+	instrActivateBlocks.draw(634, 33);
+	ofDisableAlphaBlending();
+}
+
+void GameImages::drawOverInstructions() {
+	ofSetColor(255, 255, 255);
+	instrInitialBlocks.draw(52, 174);
+	ofEnableAlphaBlending();
+	instrBuildRows.draw(52, 660);
+	instrActivateBlocks.draw(634, 33);
+	ofDisableAlphaBlending();
 }

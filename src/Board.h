@@ -13,14 +13,21 @@ public:
 	///////////////////////////////////////////////////////////////
 	void update(Piece* aPiece);
 	void draw(Piece* aPiece);
+	void drawPieceColumn();
+	void drawInitialBlocks();
+	void drawBottomRow();
 
 	bool isGameOver();
 
 	bool isPossibleMove(Piece* aPiece, int aPieceX, int aPieceY);
 	void storePiece(Piece* aPiece, int aValue);
 	int deleteLines();
+
+	void setInitialBlocks(int aType);
+	int getInitialBlocks();
 	
 	void insertNewPiece();
+	void centerPiece();
 	void reset();
 
 private:
@@ -37,6 +44,10 @@ private:
 	ofImage imgB4; // 40x40 px block
 	ofImage imgB5; // 40x40 px block
 	ofImage imgB6; // 40x40 px block
+
+	ofImage imgB1Dummy; // 40x40 px block
+
+	int initialBlocksType;
 
 	int pieceX;
 	int pieceY;

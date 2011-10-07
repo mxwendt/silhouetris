@@ -17,6 +17,13 @@ public:
 	void drawOverState();
 
 	void drawOutline(bool aSeperator);
+	void drawGameOverZone();
+	void drawHighscore();
+
+	void drawRecoInstructions();
+	void drawMoveInstructions();
+	void drawPlayInstructions();
+	void drawOverInstructions();
 
 private:
 	///////////////////////////////////////////////////////////////
@@ -25,6 +32,9 @@ private:
 	ofImage wallLeft;
 	ofImage wallRight;
 	ofImage score;
+	ofImage gameOverZone;
+	ofImage counter;
+	ofImage highscore;
 
 	ofImage outMoveLeft;
 	ofImage outMoveRight;
@@ -33,10 +43,19 @@ private:
 	ofImage outMoveSepLeft;
 	ofImage outMoveSepRight;
 
+	ofImage arrowRight;
+	ofImage arrowLeft;
+
 	ofImage outPlayLeft;
 	ofImage outPlayRight;
 	ofImage outPlayTop;
 	ofImage outPlayBottom;
+
+	ofImage instrBuildRows;
+	ofImage instrActivateBlocks;
+	ofImage instrInitialBlocks;
+	ofImage instrMoveLeft;
+	ofImage instrMoveRight;	
 };
 
 #endif

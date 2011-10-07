@@ -6,7 +6,7 @@ Score::Score() {
 
 	// initialize score table with zeros
 	int i = 0;
-	while(i < 10) {
+	while(i < 5) {
 		scoreTable.push_back(0);
 		i++;
 	}
@@ -38,11 +38,12 @@ void Score::drawCounter(int aX, int aY, int aValue) {
 
 void Score::drawScoreTable(int aX, int aY) {
 	ofSetColor(39, 40, 32);
+	stringstream ss;
+	ss << "HIGHSCORE:" << endl;
 	for(int i = 0; i < scoreTable.size(); i++) {
-		stringstream ss;
-		ss << scoreTable.at(i);
-		font.drawString(ss.str(), aX, aY + i * 40);
+		ss << i + 1 << ". " << scoreTable.at(i) << endl;
 	}
+	font.drawString(ss.str(), aX, aY/* + i * 40*/);
 }
 
 int Score::calcScore(Piece* aPiece) {
@@ -109,10 +110,12 @@ int Score::calcScore(Piece* aPiece) {
 	}
 }
 
-void Score::reset() {
+void Score::updateScore() {
 	scoreTable.push_back(highscore);
 	sort(scoreTable.rbegin(), scoreTable.rend());
 	scoreTable.pop_back();
-	
+}
+
+void Score::reset() {
 	highscore = 0;
 }

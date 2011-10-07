@@ -9,6 +9,8 @@ Board::Board() {
 	imgB5.loadImage("b5.jpg");
 	imgB6.loadImage("b6.jpg");
 
+	imgB1Dummy.loadImage("b1-dummy.png");
+
 	// clear blocks
 	for(int i = 0; i < BOARD_COLUMNS; i++) {
 		for(int j = 0; j < BOARD_ROWS; j++) {
@@ -16,23 +18,18 @@ Board::Board() {
 		}
 	}
 
+	initialBlocksType = 1;
+
 	pieceX = 3;
 	pieceY = 0;
 
 	clearScreen = false;
 }
 
-Board::~Board() {
-}
+Board::~Board() {}
 
 ///////////////////////////////////////////////////////////////
 void Board::draw(Piece* aPiece) {
-	// draw game over zone
-	ofEnableAlphaBlending();
-	ofSetColor(186, 205, 54, 80);
-	ofRect(37, 0, 400, 160);
-	ofDisableAlphaBlending();
-
 	// draw blocks on board
 	ofSetColor(255, 255, 255);
 	for(int i = 0; i < BOARD_COLUMNS; i++) {
@@ -65,15 +62,94 @@ void Board::draw(Piece* aPiece) {
 	}
 	clearScreen = false;
 
-	// draw piece background
+	// draw piece
+	aPiece->drawPiece(37 + pieceX * 40, 0 + pieceY * 40, 120, 160);
+}
+
+void Board::drawPieceColumn() {
 	ofEnableAlphaBlending();
 	ofSetColor(186, 205, 54, 80);
 	ofRect(37 + pieceX * 40, 0, 120, 760);
 	ofDisableAlphaBlending();
+}
 
-	// draw piece
-	// TODO: draw it directly here
-	aPiece->drawPiece(37 + pieceX * 40, 0 + pieceY * 40, 120, 160);
+void Board::drawInitialBlocks() {
+	if(initialBlocksType == 1) {
+		// OOX
+		// XXX
+		// OXX
+		// OXX
+		ofEnableAlphaBlending();
+		ofSetColor(255, 255, 255, 80);
+		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
+		ofDisableAlphaBlending();
+	}
+	else if(initialBlocksType == 2) {
+		// OXO
+		// XXX
+		// OXO
+		// OXO
+		ofEnableAlphaBlending();
+		ofSetColor(255, 255, 255, 80);
+		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
+		ofDisableAlphaBlending();
+	}
+	else if(initialBlocksType == 3) {
+		// XXX
+		// OOX
+		// OOX
+		// OOX
+		ofEnableAlphaBlending();
+		ofSetColor(255, 255, 255, 80);
+		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
+		ofDisableAlphaBlending();
+	}
+	else if(initialBlocksType == 4) {
+		// OOO
+		// OOO
+		// XXO
+		// XXO
+		ofEnableAlphaBlending();
+		ofSetColor(255, 255, 255, 80);
+		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
+		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
+		ofDisableAlphaBlending();
+	}
+}
+
+void Board::drawBottomRow() {
+	ofEnableAlphaBlending();
+	ofSetColor(255, 255, 255, 80);
+	imgB1Dummy.draw(0 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(1 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(2 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(6 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(7 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(8 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	imgB1Dummy.draw(9 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
+	ofDisableAlphaBlending();
 }
 
 bool Board::isGameOver() {
@@ -149,8 +225,20 @@ int Board::deleteLines() {
 	return lineScore;
 }
 
+void Board::setInitialBlocks(int aType) {
+	initialBlocksType = aType;
+}
+
+int Board::getInitialBlocks() {
+	return initialBlocksType;
+}
+
 void Board::insertNewPiece() {
-	//pieceX = 3;
+	pieceY = 0;
+}
+
+void Board::centerPiece() {
+	pieceX = 3;
 	pieceY = 0;
 }
 
