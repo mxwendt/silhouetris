@@ -14,8 +14,7 @@ Score::Score() {
 	highscore = 0;
 }
 
-Score::~Score() {
-}
+Score::~Score() {}
 
 ///////////////////////////////////////////////////////////////
 void Score::update(int aValue) {
@@ -119,3 +118,35 @@ void Score::updateScore() {
 void Score::reset() {
 	highscore = 0;
 }
+
+//void Score::loadScore() {
+//	string line;
+//	scoreRead.open("data/highscore.txt", ios::in);
+//	if(scoreRead.is_open()) {
+//		while(scoreRead.good()) {
+//			getline(scoreRead, line);
+//			int i = 0;
+//			i << atoi(line.c_str());
+//			cout << i << endl;
+//			update(i);
+//			updateScore();
+//		}
+//		scoreRead.close();
+//	}
+//	else {
+//		cout << "failed to load highscore" << endl;
+//	}
+//}
+//
+//void Score::saveScore() {
+//	scoreWrite.open("data/highscore.txt", ios::out | ios::trunc);
+//	if(scoreWrite.is_open()) {
+//		for(int i = 0; i < scoreTable.size(); i++) {
+//			scoreWrite << scoreTable.at(i) << endl;
+//		}
+//		scoreWrite.close();
+//	}
+//	else {
+//		cout << "failed to save highscore" << endl;
+//	}
+//}

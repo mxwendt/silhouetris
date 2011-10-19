@@ -9,7 +9,10 @@ Piece::Piece() {
 		}
 	}
 
-	sensitivity = 10;
+	trackingBlock.loadImage("tracking-block.png");
+	boardBlock.loadImage("b1-dummy.png");
+
+	sensitivity = 20;
 }
 
 Piece::~Piece() {}
@@ -33,11 +36,11 @@ void Piece::update(vector<ofImage*> aImages) {
 
 void Piece::drawOverlay(int aX, int aY, int aWidth, int aHeight) {
 	ofEnableAlphaBlending();
-	ofSetColor(186, 205, 54, 80);
+	ofSetColor(255, 255, 255, 90);
 	for(int i = 0; i < PIECE_COLUMNS; i++) {
 		for(int j = 0; j < PIECE_ROWS; j++) {
 			if(blocks[i][j]) {
-				ofRect((aWidth / PIECE_COLUMNS) * i + aX, (aHeight / PIECE_ROWS) * j + aY, aWidth / PIECE_COLUMNS, aHeight / PIECE_ROWS);
+				trackingBlock.draw(i * PIECE_WIDTH + aX, j * PIECE_WIDTH + aY);
 			}
 		}
 	}
@@ -45,14 +48,16 @@ void Piece::drawOverlay(int aX, int aY, int aWidth, int aHeight) {
 }
 
 void Piece::drawPiece(int aX, int aY, int aWidth, int aHeight) {
-	ofSetColor(186, 205, 54);
+	ofEnableAlphaBlending();
+	ofSetColor(255, 255, 255, 90);
 	for(int i = 0; i < PIECE_COLUMNS; i++) {
 		for(int j = 0; j < PIECE_ROWS; j++) {
 			if(blocks[i][j]) {
-				ofRect((aWidth / PIECE_COLUMNS) * i + aX, (aHeight / PIECE_ROWS) * j + aY, aWidth / PIECE_COLUMNS, aHeight / PIECE_ROWS);
+				boardBlock.draw((aWidth / PIECE_COLUMNS) * i + aX, (aHeight / PIECE_ROWS) * j + aY, aWidth / PIECE_COLUMNS, aHeight / PIECE_ROWS);
 			}
 		}
 	}
+	ofDisableAlphaBlending();
 }
 
 bool Piece::isActiveBlock(int aCol, int aRow) {

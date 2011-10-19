@@ -38,8 +38,8 @@ GameImages::~GameImages() {}
 ///////////////////////////////////////////////////////////////
 void GameImages::drawIdleState() {
 	ofSetColor(255, 255, 255);
-	logo.draw(127, 248);
-	copyright.draw(308, 690);
+	logo.draw(336, 270);
+	copyright.draw(313, 686);
 }
 
 void GameImages::drawRecoState() {
@@ -98,8 +98,6 @@ void GameImages::drawOutline(bool aSeperator) {
 
 void GameImages::drawGameOverZone() {
 	ofEnableAlphaBlending();
-	/*ofSetColor(186, 205, 54, 80);
-	ofRect(37, 0, 400, 160);*/
 	ofSetColor(255, 255, 255);
 	gameOverZone.draw(37, 138);
 	ofDisableAlphaBlending();

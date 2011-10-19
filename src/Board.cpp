@@ -18,8 +18,6 @@ Board::Board() {
 		}
 	}
 
-	initialBlocksType = 1;
-
 	pieceX = 3;
 	pieceY = 0;
 
@@ -79,66 +77,60 @@ void Board::drawInitialBlocks() {
 		// XXX
 		// OXX
 		// OXX
-		ofEnableAlphaBlending();
-		ofSetColor(255, 255, 255, 80);
-		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
-		ofDisableAlphaBlending();
+		ofSetColor(186, 205, 54);
+		ofRect(3 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
 	}
 	else if(initialBlocksType == 2) {
 		// OXO
 		// XXX
 		// OXO
 		// OXO
-		ofEnableAlphaBlending();
-		ofSetColor(255, 255, 255, 80);
-		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
-		ofDisableAlphaBlending();
+		ofSetColor(186, 205, 54);
+		ofRect(3 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
 	}
 	else if(initialBlocksType == 3) {
 		// XXX
 		// OOX
 		// OOX
 		// OOX
-		ofEnableAlphaBlending();
-		ofSetColor(255, 255, 255, 80);
-		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(5 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
-		ofDisableAlphaBlending();
+		ofSetColor(186, 205, 54);
+		ofRect(3 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 0 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 1 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(5 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
 	}
 	else if(initialBlocksType == 4) {
 		// OOO
 		// OOO
 		// XXO
 		// XXO
-		ofEnableAlphaBlending();
-		ofSetColor(255, 255, 255, 80);
-		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(3 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0);
-		imgB1Dummy.draw(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0);
-		ofDisableAlphaBlending();
+		ofSetColor(186, 205, 54);
+		ofRect(3 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(3 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 2 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
+		ofRect(4 * BLOCK_SIZE + 37, 3 * BLOCK_SIZE + 0, BLOCK_SIZE, BLOCK_SIZE);
 	}
 }
 
 void Board::drawBottomRow() {
+	ofSetColor(186, 205, 54);
+	ofRect(0 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0, BOARD_COLUMNS * BLOCK_SIZE, BLOCK_SIZE);
 	ofEnableAlphaBlending();
-	ofSetColor(255, 255, 255, 80);
+	ofSetColor(255, 255, 255, 90);
 	imgB1Dummy.draw(0 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
 	imgB1Dummy.draw(1 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
 	imgB1Dummy.draw(2 * BLOCK_SIZE + 37, 18 * BLOCK_SIZE + 0);
@@ -167,11 +159,8 @@ bool Board::isPossibleMove(Piece* aPiece, int aPieceX, int aPieceY) {
 		for(int j1 = pieceY + aPieceY, j2 = 0; j1 < pieceY + aPieceY + Piece::PIECE_ROWS; j1++, j2++) {
 			// check if the piece is outside the limits of the board
 			if(i1 < 0 || i1 > BOARD_COLUMNS - 1 || j1 > BOARD_ROWS - 1) {	
-				if(aPiece->isActiveBlock(i2, j2)) {
-					return false;
-				}
+				return false;
 			}
-
 			// check for collision with other blocks
 			if (j1 >= 0) {
 				if(aPiece->isActiveBlock(i2, j2) && blocks[i1][j1] > 0) {
@@ -180,7 +169,6 @@ bool Board::isPossibleMove(Piece* aPiece, int aPieceX, int aPieceY) {
 			}
 		}
 	}
-
 	// no collision
 	pieceX += aPieceX;
 	pieceY += aPieceY;

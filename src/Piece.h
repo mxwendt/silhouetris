@@ -36,6 +36,9 @@ private:
 
 	bool blocks[3][4];
 
+	ofImage trackingBlock;
+	ofImage boardBlock;
+
 	int sensitivity; // pixel count that makes a block active
 };
 

@@ -1,6 +1,7 @@
 #ifndef _SCORE
 #define _SCORE
 
+#include <fstream>
 #include "Piece.h"
 #include "ofMain.h"
 
@@ -21,6 +22,9 @@ public:
 	void updateScore();
 	void reset();
 
+	/*void loadScore();
+	void saveScore();*/
+
 private:
 	///////////////////////////////////////////////////////////////
 	float complexCalcR0;
@@ -32,7 +36,10 @@ private:
 
 	vector<int> scoreTable;
 
-	ofTrueTypeFont font; // should still be changed to "gunship bitmap"
+	ofTrueTypeFont font;
+
+	/*ofstream scoreWrite;
+	ifstream scoreRead;*/
 };
 
 #endif

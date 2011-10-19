@@ -10,21 +10,25 @@ void GameCore::setup() {
 	score = new Score();
 	updateTimer = new MilliTimer();
 	countTimer = new MilliTimer();
-	levelTimer = new MilliTimer();
-	kinect = new Kinect(1500, 3000);
+	kinect = new Kinect(500, 1500);
+
+	moveLeftActive = false;
+	moveRightActive = false;
 
 	// defaults
-	initialSpeed = 1000;
-	initialSpeedIncrease = 250;
-	initialLevelPeriod = 60000;
-	initialCounterPeriod = 4000;
+	movePeriod = 6;
+	speed = 1000;
 
-	speed = initialSpeed;
+	/*score->loadScore();*/
+
+	board->setInitialBlocks(1);
 
 	changeState(IDLE_STATE);
 }
 
 void GameCore::exit() {
+	/*score->saveScore();*/
+
 	// clean up
 	delete piece;
 	piece = NULL;
@@ -43,9 +47,6 @@ void GameCore::exit() {
 
 	delete countTimer;
 	countTimer = NULL;
-
-	delete levelTimer;
-	levelTimer = NULL;
 
 	delete kinect;
 	kinect = NULL;
@@ -67,10 +68,9 @@ void GameCore::update() {
 		kinect->separateImage();
 		piece->update(kinect->getImages());
 		if(piece->isInitialBlocks(board->getInitialBlocks())) {
-			counter = initialCounterPeriod / 1000;
+			counter = movePeriod;
 			updateTimer->setAlarm(500);
 			countTimer->setAlarm(1000);
-			levelTimer->setAlarm(initialLevelPeriod);
 			changeState(MOVE_STATE);
 			break;
 		}
@@ -83,10 +83,14 @@ void GameCore::update() {
 		if(updateTimer->alarm() && !piece->isEmpty()) {
 			updateTimer->setAlarm(500);
 			if(buttons->isMoveRight()) {
-				board->isPossibleMove(piece, 1, 0);
+				if(board->isPossibleMove(piece, 1, 0)) {
+					moveRightActive = true;
+				}
 			}
-			if(buttons->isMoveLeft()) {
-				board->isPossibleMove(piece, -1, 0);
+			else if(buttons->isMoveLeft()) {
+				if(board->isPossibleMove(piece, -1, 0)) {
+					moveLeftActive = true;
+				}
 			}				
 			if(countTimer->alarm()) {
 				counter--;
@@ -110,19 +114,15 @@ void GameCore::update() {
 				score->update(board->deleteLines());
 				if(board->isGameOver()) {
 					score->updateScore();
-					board->centerPiece();
 					board->reset();
+					board->centerPiece();
 					changeState(OVER_STATE);
 					break;
 				}
 				board->insertNewPiece();
-				if(levelTimer->alarm()) {
-					levelTimer->setAlarm(initialLevelPeriod);
-					speed -= initialSpeedIncrease;
-				}
 				updateTimer->setAlarm(500);
 				countTimer->setAlarm(1000);
-				counter = initialCounterPeriod / 1000;
+				counter = movePeriod;
 				changeState(MOVE_STATE);
 				break;
 			}
@@ -134,11 +134,9 @@ void GameCore::update() {
 		piece->update(kinect->getImages());
 		if(piece->isInitialBlocks(board->getInitialBlocks())) {
 			score->reset();
-			counter = initialCounterPeriod / 1000;
-			speed = initialSpeed;
+			counter = movePeriod;
 			updateTimer->setAlarm(500);
 			countTimer->setAlarm(1000);
-			levelTimer->setAlarm(initialLevelPeriod);
 			changeState(MOVE_STATE);
 			break;
 		}
@@ -159,8 +157,8 @@ void GameCore::draw() {
 		piece->drawOverlay(569, 24, 360, 480);
 		images.drawOutline(false);
 		images.drawRecoInstructions();
-		board->draw(piece);
 		board->drawInitialBlocks();
+		board->draw(piece);
 		board->drawBottomRow();
 		score->draw(520, 690);
 		break;
@@ -168,11 +166,17 @@ void GameCore::draw() {
 		images.drawMoveState();
 		kinect->drawBlockImages();
 		kinect->drawButtonImages();
-		buttons->drawMoveButtons(569, 24);
+		if(moveRightActive) {
+			moveRightActive = false;
+			buttons->drawMoveButtonRight(569, 24);
+		}
+		else if(moveLeftActive) {
+			moveLeftActive = false;
+			buttons->drawMoveButtonLeft(569, 24);
+		}
 		images.drawOutline(true);
 		board->drawPieceColumn();
-		board->draw(piece); // < change maybe?
-		//images.drawGameOverZone();
+		board->draw(piece);
 		score->draw(520, 690);
 		images.drawMoveInstructions();
 		score->drawCounter(225, 170, counter);
@@ -194,8 +198,8 @@ void GameCore::draw() {
 		piece->drawOverlay(569, 24, 360, 480);
 		images.drawOutline(false);
 		images.drawOverInstructions();
-		board->draw(piece);
 		board->drawInitialBlocks();
+		board->draw(piece);
 		board->drawBottomRow();
 		score->draw(520, 690);
 		images.drawHighscore();
@@ -210,124 +214,116 @@ void GameCore::keyPressed(int aKey) {
 	switch (aKey) {
 	///////////////////////////////////////////////////////////////
 	case OF_KEY_RETURN:
-		// go straight to over state
+		// go straight to game over state
+		score->updateScore();
 		board->reset();
-		score->reset();
-		counter = initialCounterPeriod / 1000;
-		speed = initialSpeed;
-		updateTimer->setAlarm(500);
-		countTimer->setAlarm(1000);
-		levelTimer->setAlarm(initialLevelPeriod);
+		board->centerPiece();
 		changeState(OVER_STATE);
 		break;
 	case ' ':
-		// go straight to move state
-		board->reset();
+		// go straight to move left and right state
 		score->reset();
-		counter = initialCounterPeriod / 1000;
-		speed = initialSpeed;
+		board->reset();
+		board->centerPiece();
+		counter = movePeriod;
 		updateTimer->setAlarm(500);
 		countTimer->setAlarm(1000);
-		levelTimer->setAlarm(initialLevelPeriod);
+		moveRightActive = false;
+		moveLeftActive = false;
 		changeState(MOVE_STATE);
 		break;
+	case OF_KEY_DOWN:
+		// go straight to idle state
+		score->reset();
+		board->reset();
+		board->centerPiece();
+		counter = movePeriod;
+		updateTimer->setAlarm(500);
+		countTimer->setAlarm(1000);
+		changeState(IDLE_STATE);
+		break;
+	///////////////////////////////////////////////////////////////
 	case '1':
 		// change start off form
+		// OOX
+		// XXX
+		// OXX
+		// OXX
 		board->setInitialBlocks(1);
 		break;
 	case '2':
 		// change start off form
+		// OXO
+		// XXX
+		// OXO
+		// OXO
 		board->setInitialBlocks(2);
 		break;
 	case '3':
 		// change start off form
+		// XXX
+		// OOX
+		// OOX
+		// OOX
 		board->setInitialBlocks(3);
 		break;
 	case '4':
 		// change start off form
+		// OOO
+		// OOO
+		// XXO
+		// XXO
 		board->setInitialBlocks(4);
 		break;
 	///////////////////////////////////////////////////////////////
 	case 'n':
-		// increase tracking threshold to the front by 5 cm
+		// move the front of the “tracked-area” back by 5 cm
 		kinect->changeThreshold(50, 0);	
 		break;	
 	case 'm':
-		// decrease tracking threshold to the front by 5 cm
+		// move the front of the “tracked-area” forth by 5 cm
 		kinect->changeThreshold(-50, 0);
 		break;
 	case ',':
-		// increase tracking threshold to the back by 5 cm
+		// move the back of the “tracked-area” back by 5 cm
 		kinect->changeThreshold(0, 50);
 		break;
 	case '.':
-		// decrease tracking threshold to the back by 5 cm
+		// move the back of the “tracked-area” forth by 5 cm
 		kinect->changeThreshold(0, -50);
 		break;
-	case 'q':
-		// decrease level time by 5 sec
-		initialLevelPeriod -= 5000;
-		break;	
-	case 'w':
-		// increase level time by 5 sec
-		initialLevelPeriod += 5000;
-		break;
-	case 'e':	
-		// decrease speed increase when it levels up by 0.1 sec
-		initialSpeedIncrease -= 100;
-		break;	
-	case 'r':
-		// increase speed increase when it levels up by 0.1 sec
-		initialSpeedIncrease += 100;
-		break;
-	case 'o':
-		// decrease start off speed by 0.1 sec
-		initialSpeed -= 100;
-		break;	
-	case 'i':
-		// increase start off speed by 0.1 sec
-		initialSpeed += 100;
-		break;
 	case 'k':
-		// decrease tracking sensibility by 50 pixels
+		// reduce amount of pixels that need to be tracked to activate a block or a button by 50 pixels
 		piece->changeSensitivity(-50);
 		buttons->changeSensitivity(-50);
 		break;
 	case 'l':
-		// increase tracking sensibility by 50 pixels
+		// increase amount of pixels that need to be tracked to activate a block or a button by 50 pixels
 		piece->changeSensitivity(50);
 		buttons->changeSensitivity(50);
 		break;
-	case OF_KEY_F1: 
-		changeState(IDLE_STATE);
+	///////////////////////////////////////////////////////////////
+	case 'z':
+		// decrease “time-to-move” by 1 sec (never goes lower than 3 sec)
+		movePeriod -= 1;
+		if(movePeriod < 3) {
+			movePeriod = 3;
+		}
 		break;
-	case OF_KEY_F2: 
-		changeState(RECO_STATE);
+	case 'u':
+		// increase “time-to-move” by 1 sec
+		movePeriod += 1;
 		break;
-	case OF_KEY_F3:
-		// go straight to move state
-		board->reset();
-		score->reset();
-		counter = initialCounterPeriod / 1000;
-		speed = initialSpeed;
-		updateTimer->setAlarm(500);
-		countTimer->setAlarm(1000);
-		levelTimer->setAlarm(initialLevelPeriod);
-		changeState(MOVE_STATE);
-		break;
-	case OF_KEY_F4:  
-		changeState(PLAY_STATE);
-		break;
-	case OF_KEY_F5:  
-		// go straight to over state
-		board->reset();
-		score->reset();
-		counter = initialCounterPeriod / 1000;
-		speed = initialSpeed;
-		updateTimer->setAlarm(500);
-		countTimer->setAlarm(1000);
-		levelTimer->setAlarm(initialLevelPeriod);
-		changeState(OVER_STATE);
+	case 'o':
+		// increase speed by 0.1 sec
+		speed -= 100;
+		if(speed < 0.1) {
+			speed = 0.1;
+		}
+		break;	
+	case 'i':
+		// decrease speed by 0.1 sec
+		speed += 100;
 		break;
 	default:
 		break;
@@ -338,23 +334,18 @@ void GameCore::keyPressed(int aKey) {
 void GameCore::changeState(int aState) {
 	switch(aState) {
 	case IDLE_STATE:
-		cout << "IDLE_STATE" << endl;
 		state = IDLE_STATE;
 		break;
 	case RECO_STATE:
-		cout << "RECO_STATE" << endl;
 		state = RECO_STATE;
 		break;
 	case MOVE_STATE:
-		cout << "MOVE_STATE" << endl;
 		state = MOVE_STATE;
 		break;
 	case PLAY_STATE:
-		cout << "PLAY_STATE" << endl;
 		state = PLAY_STATE;
 		break;
 	case OVER_STATE:
-		cout << "OVER_STATE" << endl;
 		state = OVER_STATE;
 		break;
 	default:

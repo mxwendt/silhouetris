@@ -208,8 +208,8 @@ void Kinect::changeThreshold(int aNear, int aFar) {
 	if(farThreshold > depthGen.GetDeviceMaxDepth()) {
 		farThreshold = depthGen.GetDeviceMaxDepth();
 	}
-	else if(farThreshold < 0) {
-		farThreshold = 0;
+	else if(farThreshold < nearThreshold) {
+		farThreshold = nearThreshold;
 	}
 }
 

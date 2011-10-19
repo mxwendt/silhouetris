@@ -12,7 +12,8 @@ public:
 	///////////////////////////////////////////////////////////////
 	void update(vector<ofImage*> aImages);
 
-	void drawMoveButtons(int aX, int aY);
+	void drawMoveButtonLeft(int aX, int aY);
+	void drawMoveButtonRight(int aX, int aY);
 
 	bool isMoveLeft();
 	bool isMoveRight();
@@ -28,8 +29,6 @@ private:
 
 	bool moveLeft;
 	bool moveRight;
-	/*bool lastMoveLeft;
-	bool lastMoveRight;*/
 
 	int sensitivity; // pixel count that makes a block active
 };

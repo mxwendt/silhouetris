@@ -43,16 +43,16 @@ private:
 	Score* score;
 	MilliTimer* updateTimer;
 	MilliTimer* countTimer;
-	MilliTimer* levelTimer;
 	Kinect* kinect;
 
-	int moveCounter;
+	bool moveLeftActive;
+	bool moveRightActive;
+
 	int counter;
 
 	int initialSpeed;
 	int initialSpeedIncrease;
-	int initialLevelPeriod;
-	int initialCounterPeriod;
+	int movePeriod;
 
 	int speed; // millisec it takes to move one row down
 };

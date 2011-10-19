@@ -5,7 +5,7 @@ MoveButtons::MoveButtons() {
 	moveLeft = false;
 	moveRight = false;
 
-	sensitivity = 10;
+	sensitivity = 20;
 }
 
 MoveButtons::~MoveButtons() {
@@ -18,15 +18,17 @@ void MoveButtons::update(vector<ofImage*> aImages) {
 	setMoveBlock(aImages.at(1)->getPixels(0, 0, 70, 480, tempImage), RIGHT);
 }
 
-void MoveButtons::drawMoveButtons(int aX, int aY) {
+void MoveButtons::drawMoveButtonLeft(int aX, int aY) {
 	ofEnableAlphaBlending();
 	ofSetColor(255, 0, 0, 80);
-	if(moveLeft) {
-		ofRect(aX - 70, aY, 70, 480);
-	} 
-	else if(moveRight) {
-		ofRect(aX + 360, aY, 70, 480);
-	}
+	ofRect(aX - 70, aY, 70, 480);
+	ofDisableAlphaBlending();
+}
+
+void MoveButtons::drawMoveButtonRight(int aX, int aY) {
+	ofEnableAlphaBlending();
+	ofSetColor(255, 0, 0, 80);
+	ofRect(aX + 360, aY, 70, 480);
 	ofDisableAlphaBlending();
 }
 
